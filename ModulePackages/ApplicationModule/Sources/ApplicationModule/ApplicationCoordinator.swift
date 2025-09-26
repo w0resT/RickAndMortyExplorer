@@ -35,8 +35,6 @@ public final class ApplicationCoordinator<ApplicationParentCoordinator: Applicat
 
 private extension ApplicationCoordinator {
     func startChracterCoordinator() {
-        print("startChracterCoordinator")
-        
         let characterCoordinator = module.makeCharacterCoordinator(parentCoordinator: self)
         self.addChildCoordinator(characterCoordinator)
         

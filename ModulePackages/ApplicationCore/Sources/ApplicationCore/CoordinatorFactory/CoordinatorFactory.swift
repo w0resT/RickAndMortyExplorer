@@ -2,8 +2,13 @@ import Services
 
 public class CoordinatorFactory {
     
+    // MARK: - Properties
+    
+    public let services: Services
 
     // MARK: - Initialization
     
-    public init() { }
+    public init(services: Services) {
+        self.services = services
+    }
 }

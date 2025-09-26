@@ -1,4 +1,7 @@
 import ApplicationCore
+import Services
+
+public typealias ModuleServices = HasCharacterService
 
 public protocol CharacterModuleProtocol: AnyObject {
     func makeCharacterCoordinator<CharacterParentCoordinator>(
@@ -11,7 +14,8 @@ extension CoordinatorFactory: CharacterModuleProtocol {
         parentCoordinator: CharacterParentCoordinator
     ) -> CharacterCoordinator<CharacterParentCoordinator> {
         return CharacterCoordinator(
-            parentCoordinator: parentCoordinator
+            parentCoordinator: parentCoordinator,
+            services: services
         )
     }
 }

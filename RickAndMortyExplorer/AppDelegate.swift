@@ -1,6 +1,7 @@
 import UIKit
 import ApplicationCore
 import ApplicationModule
+import Services
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions
         launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        let coordinatorFactory = CoordinatorFactory()
+        let serviceContainer = ServiceContainer()
+        let coordinatorFactory = CoordinatorFactory(services: serviceContainer)
         applicationCoordinator = coordinatorFactory.makeApplicationCoordinator(parentCoordinator: self)
         applicationCoordinator?.start()
         

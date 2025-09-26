@@ -2,11 +2,17 @@ import ApplicationCore
 
 public final class CharacterCoordinator<CharacterParentCoordinator: CharacterParentCoordinatorProtocol>: Coordinator<CharacterParentCoordinator> {
     
+    // MARK: - Properties
+    private let services: ModuleServices
+    
     // MARK: - Initialization
     
     internal init(
-        parentCoordinator: CharacterParentCoordinator
+        parentCoordinator: CharacterParentCoordinator,
+        services: ModuleServices
     ) {
+        self.services = services
+        
         super.init(parentCoordinator: parentCoordinator)
     }
     
