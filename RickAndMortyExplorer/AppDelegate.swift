@@ -1,36 +1,31 @@
-//
-//  AppDelegate.swift
-//  RickAndMortyExplorer
-//
-//  Created by Михаил Юрчук on 26.09.2025.
-//
-
 import UIKit
+import ApplicationCore
+import ApplicationModule
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    // MARK: - Properties
+    
+    private var applicationCoordinator: ApplicationCoordinator<AppDelegate>?
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    // MARK: - Application Lifecycle
+    
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions
+        launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+        let coordinatorFactory = CoordinatorFactory()
+        applicationCoordinator = coordinatorFactory.makeApplicationCoordinator(parentCoordinator: self)
+        applicationCoordinator?.start()
+        
         return true
     }
-
-    // MARK: UISceneSession Lifecycle
-
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
-
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-    }
-
-
 }
 
+// MARK: - ApplicationParentCoordinatorProtocol
+
+extension AppDelegate: ApplicationParentCoordinatorProtocol {
+    func childCoordinatorDidDisappear(_ coordinator: CoordinatorProtocol) { }
+}
