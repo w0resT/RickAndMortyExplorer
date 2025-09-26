@@ -1,12 +1,23 @@
 import ApplicationCore
+import CharacterFeature
 
 public final class ApplicationCoordinator<ApplicationParentCoordinator: ApplicationParentCoordinatorProtocol>: Coordinator<ApplicationParentCoordinator> {
+    
+    // MARK: - Types
+    public typealias Module = CharacterModuleProtocol
+    
+    // MARK: - Properties
+    
+    private let module: Module
 
     // MARK: - Initialization
     
     public init(
-        parentCoordinator: ApplicationParentCoordinator?
+        parentCoordinator: ApplicationParentCoordinator?,
+        module: Module
     ) {
+        self.module = module
+        
         super.init(parentCoordinator: parentCoordinator)
     }
 
@@ -25,5 +36,16 @@ public final class ApplicationCoordinator<ApplicationParentCoordinator: Applicat
 private extension ApplicationCoordinator {
     func startChracterCoordinator() {
         print("startChracterCoordinator")
+        
+        let characterCoordinator = module.makeCharacterCoordinator(parentCoordinator: self)
+        self.addChildCoordinator(characterCoordinator)
+        
+        characterCoordinator.start()
     }
+}
+
+// MARK: - CharacterFeature Module Output Implementation
+
+extension ApplicationCoordinator: CharacterParentCoordinatorProtocol {
+    
 }

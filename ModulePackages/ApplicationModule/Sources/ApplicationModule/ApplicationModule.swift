@@ -11,7 +11,8 @@ extension CoordinatorFactory: ApplicationModuleProtocol {
         parentCoordinator: ApplicationParentCoordinator?
     ) -> ApplicationCoordinator<ApplicationParentCoordinator> {
         return ApplicationCoordinator(
-            parentCoordinator: parentCoordinator
+            parentCoordinator: parentCoordinator,
+            module: self
         )
     }
 }

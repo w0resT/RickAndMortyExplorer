@@ -10,6 +10,7 @@
 		14DCE3082E86CD7A00CC3BBC /* ApplicationCore in Frameworks */ = {isa = PBXBuildFile; productRef = 14DCE3072E86CD7A00CC3BBC /* ApplicationCore */; };
 		14DCE30A2E86CD7E00CC3BBC /* ApplicationModule in Frameworks */ = {isa = PBXBuildFile; productRef = 14DCE3092E86CD7E00CC3BBC /* ApplicationModule */; };
 		14DCE30C2E86CD8200CC3BBC /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 14DCE30B2E86CD8200CC3BBC /* Services */; };
+		14DCE30F2E86CE9800CC3BBC /* CharacterFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 14DCE30E2E86CE9800CC3BBC /* CharacterFeature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 			membershipExceptions = (
 				ApplicationCore,
 				ApplicationModule,
+				CharacterFeature,
 				Services,
 			);
 			target = 14DCE2E82E86BC4600CC3BBC /* RickAndMortyExplorer */;
@@ -60,6 +62,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14DCE30C2E86CD8200CC3BBC /* Services in Frameworks */,
+				14DCE30F2E86CE9800CC3BBC /* CharacterFeature in Frameworks */,
 				14DCE3082E86CD7A00CC3BBC /* ApplicationCore in Frameworks */,
 				14DCE30A2E86CD7E00CC3BBC /* ApplicationModule in Frameworks */,
 			);
@@ -117,6 +120,7 @@
 				14DCE3072E86CD7A00CC3BBC /* ApplicationCore */,
 				14DCE3092E86CD7E00CC3BBC /* ApplicationModule */,
 				14DCE30B2E86CD8200CC3BBC /* Services */,
+				14DCE30E2E86CE9800CC3BBC /* CharacterFeature */,
 			);
 			productName = RickAndMortyExplorer;
 			productReference = 14DCE2E92E86BC4600CC3BBC /* RickAndMortyExplorer.app */;
@@ -383,6 +387,10 @@
 		14DCE30B2E86CD8200CC3BBC /* Services */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Services;
+		};
+		14DCE30E2E86CE9800CC3BBC /* CharacterFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CharacterFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
