@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		14DCE3082E86CD7A00CC3BBC /* ApplicationCore in Frameworks */ = {isa = PBXBuildFile; productRef = 14DCE3072E86CD7A00CC3BBC /* ApplicationCore */; };
+		14DCE30A2E86CD7E00CC3BBC /* ApplicationModule in Frameworks */ = {isa = PBXBuildFile; productRef = 14DCE3092E86CD7E00CC3BBC /* ApplicationModule */; };
+		14DCE30C2E86CD8200CC3BBC /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 14DCE30B2E86CD8200CC3BBC /* Services */; };
+		14DCE30F2E86CE9800CC3BBC /* CharacterFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 14DCE30E2E86CE9800CC3BBC /* CharacterFeature */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		14DCE2E92E86BC4600CC3BBC /* RickAndMortyExplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMortyExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -15,6 +22,16 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+			);
+			target = 14DCE2E82E86BC4600CC3BBC /* RickAndMortyExplorer */;
+		};
+		14DCE3032E86C8AD00CC3BBC /* Exceptions for "ModulePackages" folder in "RickAndMortyExplorer" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				ApplicationCore,
+				ApplicationModule,
+				CharacterFeature,
+				Services,
 			);
 			target = 14DCE2E82E86BC4600CC3BBC /* RickAndMortyExplorer */;
 		};
@@ -29,6 +46,14 @@
 			path = RickAndMortyExplorer;
 			sourceTree = "<group>";
 		};
+		14DCE3012E86C86200CC3BBC /* ModulePackages */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				14DCE3032E86C8AD00CC3BBC /* Exceptions for "ModulePackages" folder in "RickAndMortyExplorer" target */,
+			);
+			path = ModulePackages;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +61,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14DCE30C2E86CD8200CC3BBC /* Services in Frameworks */,
+				14DCE30F2E86CE9800CC3BBC /* CharacterFeature in Frameworks */,
+				14DCE3082E86CD7A00CC3BBC /* ApplicationCore in Frameworks */,
+				14DCE30A2E86CD7E00CC3BBC /* ApplicationModule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,7 +74,9 @@
 		14DCE2E02E86BC4600CC3BBC = {
 			isa = PBXGroup;
 			children = (
+				14DCE3012E86C86200CC3BBC /* ModulePackages */,
 				14DCE2EB2E86BC4600CC3BBC /* RickAndMortyExplorer */,
+				14DCE3062E86CD7A00CC3BBC /* Frameworks */,
 				14DCE2EA2E86BC4600CC3BBC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +87,13 @@
 				14DCE2E92E86BC4600CC3BBC /* RickAndMortyExplorer.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		14DCE3062E86CD7A00CC3BBC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -75,9 +113,14 @@
 			);
 			fileSystemSynchronizedGroups = (
 				14DCE2EB2E86BC4600CC3BBC /* RickAndMortyExplorer */,
+				14DCE3012E86C86200CC3BBC /* ModulePackages */,
 			);
 			name = RickAndMortyExplorer;
 			packageProductDependencies = (
+				14DCE3072E86CD7A00CC3BBC /* ApplicationCore */,
+				14DCE3092E86CD7E00CC3BBC /* ApplicationModule */,
+				14DCE30B2E86CD8200CC3BBC /* Services */,
+				14DCE30E2E86CE9800CC3BBC /* CharacterFeature */,
 			);
 			productName = RickAndMortyExplorer;
 			productReference = 14DCE2E92E86BC4600CC3BBC /* RickAndMortyExplorer.app */;
@@ -149,7 +192,6 @@
 				INFOPLIST_FILE = RickAndMortyExplorer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -176,7 +218,6 @@
 				INFOPLIST_FILE = RickAndMortyExplorer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -333,6 +374,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		14DCE3072E86CD7A00CC3BBC /* ApplicationCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ApplicationCore;
+		};
+		14DCE3092E86CD7E00CC3BBC /* ApplicationModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ApplicationModule;
+		};
+		14DCE30B2E86CD8200CC3BBC /* Services */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Services;
+		};
+		14DCE30E2E86CE9800CC3BBC /* CharacterFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CharacterFeature;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 14DCE2E12E86BC4600CC3BBC /* Project object */;
 }
