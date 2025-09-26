@@ -27,6 +27,16 @@ public final class CharacterCoordinator<CharacterParentCoordinator: CharacterPar
 
 private extension CharacterCoordinator {
     func showCharacterList() {
-        print("showCharacterList")
+        let viewController = CharacterModuleBuilder.build(moduleOutput: self)
+        
+        self.router.pushViewController(viewController: viewController)
+    }
+}
+
+// MARK: - Character Module Output
+
+extension CharacterCoordinator: CharacterModuleOutputProtocol {
+    func showCharacterDetails(character: Character) {
+        print("showCharacterDetails for character: \(character.id)")
     }
 }
