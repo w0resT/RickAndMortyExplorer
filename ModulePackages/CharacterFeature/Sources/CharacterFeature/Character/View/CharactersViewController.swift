@@ -1,9 +1,12 @@
 import UIKit
 import Combine
+import ApplicationCore
 
 final class CharactersViewController: UIViewController {
     
     // MARK: - Properties
+    
+    private var navigationOutput: NavigationListenerProtocol?
     
     private let viewModel: CharactersViewModel
     private var cancellables = Set<AnyCancellable>()
@@ -42,7 +45,11 @@ final class CharactersViewController: UIViewController {
     
     // MARK: - Initialization
     
-    init(viewModel: CharactersViewModel) {
+    init(
+        navigationOutput: NavigationListenerProtocol?,
+        viewModel: CharactersViewModel
+    ) {
+        self.navigationOutput = navigationOutput
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
@@ -198,7 +205,14 @@ extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDa
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        collectionView.deselectItem(at: indexPath, animated: true)
+        let cell = collectionView.cellForItem(at: indexPath)
+        UIView.animate(withDuration: 0.1) {
+            cell?.alpha = 0.5
+        } completion: { _ in
+            UIView.animate(withDuration: 0.1) {
+                cell?.alpha = 1
+            }
+        }
         
         let character = viewModel.characters[indexPath.item]
         viewModel.didSelectCharacter(character)

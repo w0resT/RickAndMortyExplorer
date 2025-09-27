@@ -2,10 +2,16 @@ import UIKit
 
 final class CharacterModuleBuilder {
     static func build(
-        moduleOutput: CharacterModuleOutputProtocol?
+        moduleOutput: CharacterModuleOutputProtocol?,
+        navigationOutput: CharacterNavigationListenerOutputProtocol?
     ) -> UIViewController {
         let viewModel = CharactersViewModel(moduleOutput: moduleOutput)
-        let viewController = CharactersViewController(viewModel: viewModel)
+        
+        let navigationListener = CharacterNavigationListener(output: navigationOutput)
+        let viewController = CharactersViewController(
+            navigationOutput: navigationListener,
+            viewModel: viewModel
+        )
         
         return viewController
     }

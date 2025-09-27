@@ -16,8 +16,19 @@ public final class CharacterDetailsCoordinator<CharacterDetatailsParentCoordinat
     
     public func showCharacterDetails(character: Character) {
         let initialData = CharacterDetailsInitialData(character: character)
-        let viewController = CharacterDetailsModuleBuilder.build(initialData: initialData)
+        let viewController = CharacterDetailsModuleBuilder.build(
+            navigationOutput: self,
+            initialData: initialData
+        )
         
         self.router.pushViewController(viewController: viewController)
+    }
+}
+
+// MARK: - CharacterDetailsNavigationListenerOutputProtocol
+
+extension CharacterDetailsCoordinator: CharacterDetailsNavigationListenerOutputProtocol {
+    public func viewControllerDidDisappear() {
+        self.parentCoordinator?.childCoordinatorDidDisappear(self)
     }
 }

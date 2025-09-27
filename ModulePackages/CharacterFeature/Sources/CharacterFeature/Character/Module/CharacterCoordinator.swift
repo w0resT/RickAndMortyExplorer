@@ -33,7 +33,10 @@ public final class CharacterCoordinator<CharacterParentCoordinator: CharacterPar
 
 private extension CharacterCoordinator {
     func showCharactersList() {
-        let viewController = CharacterModuleBuilder.build(moduleOutput: self)
+        let viewController = CharacterModuleBuilder.build(
+            moduleOutput: self,
+            navigationOutput: self
+        )
         
         self.router.pushViewController(viewController: viewController)
     }
@@ -44,13 +47,26 @@ private extension CharacterCoordinator {
 extension CharacterCoordinator: CharacterModuleOutputProtocol {
     func showCharacterDetails(character: Character) {
         let detailsCoordinator = module.makeCharacterDetailsCoordinator(parentCoordinator: self)
+        self.addChildCoordinator(detailsCoordinator)
+        
         detailsCoordinator.start()
         detailsCoordinator.showCharacterDetails(character: character)
+    }
+}
+
+// MARK: - Character Module Navigation Output
+
+extension CharacterCoordinator: CharacterNavigationListenerOutputProtocol {
+    public func viewControllerDidDisappear() {
+        self.parentCoordinator?.childCoordinatorDidDisappear(self)
     }
 }
 
 // MARK: - CharacterDetails Module Output
 
 extension CharacterCoordinator: CharacterDetailsParentCoordinator {
-    
+    public func childCoordinatorDidDisappear(_ coordinator: CoordinatorProtocol) {
+        coordinator.finish()
+        self.removeChildCoordinator(coordinator)
+    }
 }

@@ -45,5 +45,8 @@ private extension ApplicationCoordinator {
 // MARK: - CharacterFeature Module Output Implementation
 
 extension ApplicationCoordinator: CharacterParentCoordinatorProtocol {
-    
+    public func childCoordinatorDidDisappear(_ coordinator: CoordinatorProtocol) {
+        coordinator.finish()
+        self.removeChildCoordinator(coordinator)
+    }
 }
