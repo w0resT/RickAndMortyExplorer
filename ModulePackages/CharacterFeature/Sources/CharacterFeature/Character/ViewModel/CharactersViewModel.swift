@@ -20,16 +20,12 @@ final class CharactersViewModel {
         self.characters = Character.mock
         self.loadingState = .loading
         
-        // test
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.loadingState = .success
-        }
+        self.loadingState = .success
     }
     
     // MARK: - Methods
     
     func didSelectCharacter(_ character: Character) {
-        print("didSelectCharacter: \(character.id)")
         moduleOutput?.showCharacterDetails(character: character)
     }
     

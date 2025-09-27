@@ -21,7 +21,7 @@ public final class ApplicationCoordinator<ApplicationParentCoordinator: Applicat
         super.init(parentCoordinator: parentCoordinator)
     }
 
-    // MARK: - Override Methods
+    // MARK: - Methods
     
     public override func start() {
         self.router.setRootWindow()

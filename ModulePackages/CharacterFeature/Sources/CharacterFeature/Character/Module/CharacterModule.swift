@@ -15,7 +15,8 @@ extension CoordinatorFactory: CharacterModuleProtocol {
     ) -> CharacterCoordinator<CharacterParentCoordinator> {
         return CharacterCoordinator(
             parentCoordinator: parentCoordinator,
-            services: services
+            services: services,
+            module: self
         )
     }
 }
