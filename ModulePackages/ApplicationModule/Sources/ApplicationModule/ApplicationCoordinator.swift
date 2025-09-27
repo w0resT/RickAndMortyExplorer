@@ -21,7 +21,7 @@ public final class ApplicationCoordinator<ApplicationParentCoordinator: Applicat
         super.init(parentCoordinator: parentCoordinator)
     }
 
-    // MARK: - Override Methods
+    // MARK: - Methods
     
     public override func start() {
         self.router.setRootWindow()
@@ -35,8 +35,6 @@ public final class ApplicationCoordinator<ApplicationParentCoordinator: Applicat
 
 private extension ApplicationCoordinator {
     func startChracterCoordinator() {
-        print("startChracterCoordinator")
-        
         let characterCoordinator = module.makeCharacterCoordinator(parentCoordinator: self)
         self.addChildCoordinator(characterCoordinator)
         
@@ -47,5 +45,8 @@ private extension ApplicationCoordinator {
 // MARK: - CharacterFeature Module Output Implementation
 
 extension ApplicationCoordinator: CharacterParentCoordinatorProtocol {
-    
+    public func childCoordinatorDidDisappear(_ coordinator: CoordinatorProtocol) {
+        coordinator.finish()
+        self.removeChildCoordinator(coordinator)
+    }
 }
