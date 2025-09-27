@@ -1,3 +1,5 @@
-public protocol NavigationListenerProtocol: AnyObject {
+import UIKit
+
+public protocol NavigationListenerProtocol: UISheetPresentationControllerDelegate {
     func viewControllerDidDisappear()
 }

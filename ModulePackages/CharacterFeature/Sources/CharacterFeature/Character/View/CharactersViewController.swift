@@ -43,6 +43,15 @@ final class CharactersViewController: UIViewController {
         return indicator
     }()
     
+    private lazy var searchController: UISearchController = {
+        let search = UISearchController(searchResultsController: nil)
+        search.searchResultsUpdater = self
+        search.searchBar.placeholder = "Search characters"
+        return search
+    }()
+    
+    private var footerLoadingView: FooterLoadingCollectionReusableView?
+    
     // MARK: - Initialization
     
     init(
@@ -77,6 +86,8 @@ private extension CharactersViewController {
     func setupUI() {
         self.view.backgroundColor = .systemBackground
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.searchController = searchController
+        self.navigationItem.hidesSearchBarWhenScrolling = false
         self.title = "Characters"
         
         addFiltersButton()
@@ -164,7 +175,7 @@ private extension CharactersViewController {
     }
     
     @objc func didTapFilters() {
-        print("didTapFilters")
+        viewModel.didTapFilters()
     }
 }
 
@@ -232,9 +243,41 @@ extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDa
             return UICollectionReusableView()
         }
         
-        footer.startAnimating()
-        
+        self.footerLoadingView = footer
+                
         return footer
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplaySupplementaryView view: UICollectionReusableView,
+        forElementKind elementKind: String,
+        at indexPath: IndexPath
+    ) {
+        guard elementKind == UICollectionView.elementKindSectionFooter else {
+            return
+        }
+        
+        if viewModel.isLastPageReached {
+            self.footerLoadingView?.stopAnimation()
+        } else {
+            self.footerLoadingView?.startAnimating()
+        }
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didEndDisplayingSupplementaryView view: UICollectionReusableView,
+        forElementOfKind elementKind: String,
+        at indexPath: IndexPath
+    ) {
+        guard elementKind == UICollectionView.elementKindSectionFooter else {
+            return
+        }
+        
+        print(self.footerLoadingView?.isAnimating())
+        
+        self.footerLoadingView?.stopAnimation()
     }
     
     func collectionView(
@@ -242,12 +285,27 @@ extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDa
         layout collectionViewLayout: UICollectionViewLayout,
         referenceSizeForFooterInSection section: Int
     ) -> CGSize {
-        guard viewModel.needToShowNextLoadingIndicator() else { return .zero }
+        guard viewModel.isLoadingMore else { return .zero }
         
         return CGSize(
-            width: collectionView.frame.width,
+            width: collectionView.bounds.width,
             height: 70
         )
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard !viewModel.isLoadingMore,
+              !viewModel.isLastPageReached,
+              !viewModel.characters.isEmpty
+        else { return }
+        
+        let scrollViewOffset = scrollView.contentOffset.y
+        let contentViewHeight = scrollView.contentSize.height
+        let scrollViewHeight = scrollView.bounds.height
+        
+        if scrollViewOffset >= (contentViewHeight - scrollViewHeight) {
+            viewModel.loadMoreCharacters()
+        }
     }
 }
 
@@ -259,8 +317,16 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let inset: CGFloat = 12
+        let inset: CGFloat = 15
         let width = collectionView.frame.width - inset * 2
         return CGSize(width: width, height: 108)
+    }
+}
+
+// MARK: -
+
+extension CharactersViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        viewModel.searchQuery = searchController.searchBar.text ?? ""
     }
 }

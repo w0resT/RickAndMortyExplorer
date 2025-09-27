@@ -4,7 +4,7 @@ final class CharacterModuleBuilder {
     static func build(
         moduleOutput: CharacterModuleOutputProtocol?,
         navigationOutput: CharacterNavigationListenerOutputProtocol?
-    ) -> UIViewController {
+    ) -> (UIViewController, CharacterModuleInputProtocol) {
         let viewModel = CharactersViewModel(moduleOutput: moduleOutput)
         
         let navigationListener = CharacterNavigationListener(output: navigationOutput)
@@ -13,6 +13,6 @@ final class CharacterModuleBuilder {
             viewModel: viewModel
         )
         
-        return viewController
+        return (viewController, viewModel)
     }
 }

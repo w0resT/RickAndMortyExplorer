@@ -11,7 +11,7 @@ public final class Router: RouterProtocol {
     private var rootNavigationController: UINavigationController?
 
     // MARK: - RouterProtocol Methods
-    
+
     public func setRootWindow() {
         self.rootWindow = UIWindow(frame: UIScreen.main.bounds)
         self.rootWindow?.makeKeyAndVisible()
@@ -24,5 +24,9 @@ public final class Router: RouterProtocol {
 
     public func pushViewController(viewController: UIViewController) {
         self.rootNavigationController?.pushViewController(viewController, animated: true)
+    }
+
+    public func presentViewController(viewController: UIViewController) {
+        self.rootNavigationController?.viewControllers.last?.present(viewController, animated: true)
     }
 }

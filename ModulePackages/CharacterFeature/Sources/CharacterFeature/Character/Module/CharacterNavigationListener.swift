@@ -1,6 +1,7 @@
+import UIKit
 import ApplicationCore
 
-public final class CharacterNavigationListener: NavigationListenerProtocol {
+public final class CharacterNavigationListener: NSObject, NavigationListenerProtocol {
     
     // MARK: - Properties
     

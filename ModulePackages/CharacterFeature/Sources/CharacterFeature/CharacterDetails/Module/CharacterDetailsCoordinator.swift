@@ -1,6 +1,6 @@
 import ApplicationCore
 
-public final class CharacterDetailsCoordinator<CharacterDetatailsParentCoordinator: CharacterDetailsParentCoordinator>: Coordinator<CharacterDetatailsParentCoordinator> {
+public final class CharacterDetailsCoordinator<CharacterDetatailsParentCoordinator: CharacterDetailsParentCoordinatorProtocol>: Coordinator<CharacterDetatailsParentCoordinator> {
     
     // MARK: - Initialization
     

@@ -4,10 +4,13 @@ public final class CharacterCoordinator<CharacterParentCoordinator: CharacterPar
     
     // MARK: - Types
     public typealias Module = CharacterDetailsModuleProtocol
+        & CharacterFiltersModuleProtocol
     
     // MARK: - Properties
     private let services: ModuleServices
     private let module: Module
+    
+    private weak var moduleInput: CharacterModuleInputProtocol?
     
     // MARK: - Initialization
     
@@ -33,10 +36,12 @@ public final class CharacterCoordinator<CharacterParentCoordinator: CharacterPar
 
 private extension CharacterCoordinator {
     func showCharactersList() {
-        let viewController = CharacterModuleBuilder.build(
+        let (viewController, viewModel) = CharacterModuleBuilder.build(
             moduleOutput: self,
             navigationOutput: self
         )
+        
+        self.moduleInput = viewModel
         
         self.router.pushViewController(viewController: viewController)
     }
@@ -52,6 +57,14 @@ extension CharacterCoordinator: CharacterModuleOutputProtocol {
         detailsCoordinator.start()
         detailsCoordinator.showCharacterDetails(character: character)
     }
+    
+    func showCharacterFilters(filters: CharacterFilters) {
+        let filtersCoordinator = module.makeCharacterFiltersCoordinator(parentCoordinator: self)
+        self.addChildCoordinator(filtersCoordinator)
+        
+        filtersCoordinator.start()
+        filtersCoordinator.showCharacterFilters(currentFilters: filters)
+    }
 }
 
 // MARK: - Character Module Navigation Output
@@ -62,11 +75,15 @@ extension CharacterCoordinator: CharacterNavigationListenerOutputProtocol {
     }
 }
 
-// MARK: - CharacterDetails Module Output
+// MARK: - Character Childs Coordinators Module Output
 
-extension CharacterCoordinator: CharacterDetailsParentCoordinator {
+extension CharacterCoordinator: CharacterDetailsParentCoordinatorProtocol, CharacterFiltersParentCoordinatorProtocol {
     public func childCoordinatorDidDisappear(_ coordinator: CoordinatorProtocol) {
         coordinator.finish()
         self.removeChildCoordinator(coordinator)
+    }
+    
+    public func applyFilters(filters: CharacterFilters) {
+        self.moduleInput?.applyFilters(filters: filters)
     }
 }

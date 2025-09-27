@@ -32,6 +32,14 @@ final class FooterLoadingCollectionReusableView: UICollectionReusableView {
     func startAnimating() {
         loadingIndicator.startAnimating()
     }
+    
+    func stopAnimation() {
+        loadingIndicator.stopAnimating()
+    }
+    
+    func isAnimating() -> Bool {
+        return loadingIndicator.isAnimating
+    }
 }
 
 // MARK: - Setup UI
