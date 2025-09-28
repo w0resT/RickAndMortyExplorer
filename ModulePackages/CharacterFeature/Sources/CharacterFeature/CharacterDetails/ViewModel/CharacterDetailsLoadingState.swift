@@ -1,7 +1,6 @@
-enum CharactersLoadingState: String {
+enum CharactersDetailsLoadingState {
     case none
     case loading
-    case loadingNext
     case success
     case error
     case cancelled

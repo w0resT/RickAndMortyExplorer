@@ -7,7 +7,7 @@ public final class CharacterCoordinator<CharacterParentCoordinator: CharacterPar
         & CharacterFiltersModuleProtocol
     
     // MARK: - Properties
-    private let services: ModuleServices
+    private let services: CharacterModuleServices
     private let module: Module
     
     private weak var moduleInput: CharacterModuleInputProtocol?
@@ -16,7 +16,7 @@ public final class CharacterCoordinator<CharacterParentCoordinator: CharacterPar
     
     internal init(
         parentCoordinator: CharacterParentCoordinator,
-        services: ModuleServices,
+        services: CharacterModuleServices,
         module: Module
     ) {
         self.services = services
@@ -38,7 +38,8 @@ private extension CharacterCoordinator {
     func showCharactersList() {
         let (viewController, viewModel) = CharacterModuleBuilder.build(
             moduleOutput: self,
-            navigationOutput: self
+            navigationOutput: self,
+            services: services
         )
         
         self.moduleInput = viewModel

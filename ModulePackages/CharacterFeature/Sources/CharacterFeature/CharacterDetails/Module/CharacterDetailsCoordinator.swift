@@ -2,11 +2,18 @@ import ApplicationCore
 
 public final class CharacterDetailsCoordinator<CharacterDetatailsParentCoordinator: CharacterDetailsParentCoordinatorProtocol>: Coordinator<CharacterDetatailsParentCoordinator> {
     
+    // MARK: - Properties
+    
+    private let services: DetailsModuleServices
+    
     // MARK: - Initialization
     
-    internal init(
-        parentCoordinator: CharacterDetatailsParentCoordinator
+    init(
+        parentCoordinator: CharacterDetatailsParentCoordinator,
+        services: DetailsModuleServices
     ) {
+        self.services = services
+        
         super.init(parentCoordinator: parentCoordinator)
     }
     
@@ -18,6 +25,7 @@ public final class CharacterDetailsCoordinator<CharacterDetatailsParentCoordinat
         let initialData = CharacterDetailsInitialData(character: character)
         let viewController = CharacterDetailsModuleBuilder.build(
             navigationOutput: self,
+            services: services,
             initialData: initialData
         )
         

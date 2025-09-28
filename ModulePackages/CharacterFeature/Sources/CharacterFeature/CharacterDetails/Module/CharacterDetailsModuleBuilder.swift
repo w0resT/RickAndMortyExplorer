@@ -5,9 +5,13 @@ import SwiftUI
 final class CharacterDetailsModuleBuilder {
     static func build(
         navigationOutput: CharacterDetailsNavigationListenerOutputProtocol?,
+        services: DetailsModuleServices,
         initialData: CharacterDetailsInitialData
     ) -> UIViewController {
-        let viewModel = CharacterDetailsViewModel(initialData: initialData)
+        let viewModel = CharacterDetailsViewModel(
+            services: services,
+            initialData: initialData
+        )
         let view = CharacterDetailsView(viewModel: viewModel)
         
         let navigationListener = CharacterDetailsNavigationListener(output: navigationOutput)

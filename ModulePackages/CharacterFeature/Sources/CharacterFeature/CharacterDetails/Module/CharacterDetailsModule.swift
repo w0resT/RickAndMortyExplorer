@@ -1,4 +1,7 @@
 import ApplicationCore
+import Services
+
+public typealias DetailsModuleServices = HasImageLoader
 
 public protocol CharacterDetailsModuleProtocol: AnyObject {
     func makeCharacterDetailsCoordinator<CharacterDetailsParentCoordinator>(
@@ -11,7 +14,8 @@ extension CoordinatorFactory: CharacterDetailsModuleProtocol {
         parentCoordinator: CharacterDetailsParentCoordinator
     ) -> CharacterDetailsCoordinator<CharacterDetailsParentCoordinator>{
         return CharacterDetailsCoordinator(
-            parentCoordinator: parentCoordinator
+            parentCoordinator: parentCoordinator,
+            services: services
         )
     }
 }

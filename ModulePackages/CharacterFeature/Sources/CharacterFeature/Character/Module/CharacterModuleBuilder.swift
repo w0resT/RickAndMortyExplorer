@@ -3,9 +3,13 @@ import UIKit
 final class CharacterModuleBuilder {
     static func build(
         moduleOutput: CharacterModuleOutputProtocol?,
-        navigationOutput: CharacterNavigationListenerOutputProtocol?
+        navigationOutput: CharacterNavigationListenerOutputProtocol?,
+        services: CharacterModuleServices
     ) -> (UIViewController, CharacterModuleInputProtocol) {
-        let viewModel = CharactersViewModel(moduleOutput: moduleOutput)
+        let viewModel = CharactersViewModel(
+            moduleOutput: moduleOutput,
+            services: services
+        )
         
         let navigationListener = CharacterNavigationListener(output: navigationOutput)
         let viewController = CharactersViewController(
