@@ -221,6 +221,14 @@ extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDa
             status: character.status
         )
         
+        let avatarImage = self.viewModel.imageLoads
+            .filter { $0.id == character.id }
+            .map { UIImage(data: $0.data) }
+            .eraseToAnyPublisher()
+        
+        cell.bindAvatarImage(avatarImage)
+        self.viewModel.loadImage(for: character)
+        
         return cell
     }
     

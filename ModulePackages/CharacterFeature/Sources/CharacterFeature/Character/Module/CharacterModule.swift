@@ -1,7 +1,8 @@
 import ApplicationCore
 import Services
 
-public typealias ModuleServices = HasCharacterService
+public typealias CharacterModuleServices = HasCharacterService
+    & HasImageLoader
 
 public protocol CharacterModuleProtocol: AnyObject {
     func makeCharacterCoordinator<CharacterParentCoordinator>(

@@ -10,10 +10,12 @@ final class CharactersViewModel {
     @Published private(set) var loadingState: CharactersLoadingState
     @Published private(set) var errorMessage: String?
     @Published var searchQuery: String
-    let charactersChange = PassthroughSubject<CharactersChange, Never>()
+    
+    internal let charactersChange = PassthroughSubject<CharactersChange, Never>()
+    internal let imageLoads = PassthroughSubject<(id: Int, data: Data), Never>()
     
     private weak var moduleOutput: CharacterModuleOutputProtocol?
-    private let services: ModuleServices
+    private let services: CharacterModuleServices
     
     private var cancellables = Set<AnyCancellable>()
     private var characterFilters: CharacterFilters
@@ -28,7 +30,7 @@ final class CharactersViewModel {
     
     init(
         moduleOutput: CharacterModuleOutputProtocol?,
-        services: ModuleServices
+        services: CharacterModuleServices
     ) {
         self.moduleOutput = moduleOutput
         self.services = services
@@ -43,7 +45,7 @@ final class CharactersViewModel {
             gender: nil
         )
         
-        setuoBindings()
+        setupBindings()
         loadCharactersInitial()
     }
     
@@ -53,7 +55,7 @@ final class CharactersViewModel {
     
     // MARK: - Methods
     
-    func setuoBindings() {
+    func setupBindings() {
         $searchQuery
             .dropFirst(2)
             .debounce(for: 0.7, scheduler: DispatchQueue.main)
@@ -73,6 +75,24 @@ final class CharactersViewModel {
                 nextURL: nextURL,
                 append: true
             )
+        }
+    }
+    
+    func loadImage(for character: Character) {
+        let urlString = character.image
+        
+        Task { [weak self] in
+            do {
+                guard let imageData = try await self?.services.imageLoader.fetchImage(urlString) else {
+                    return
+                }
+                
+                await MainActor.run { [weak self] in
+                    self?.imageLoads.send((id: character.id, data: imageData))
+                }
+            } catch {
+                print("Image loading for id '\(character.id)' error: ")
+            }
         }
     }
     

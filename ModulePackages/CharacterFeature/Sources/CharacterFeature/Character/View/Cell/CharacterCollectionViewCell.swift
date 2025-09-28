@@ -1,10 +1,15 @@
 import UIKit
+import Combine
 
 final class CharacterCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Type Properties
     
     static let reuseIdentifier = "CharacterCollectionViewCell"
+    
+    // MARK: - Properties
+    
+    private var cancellable: AnyCancellable?
     
     // MARK: - UI Elements
     
@@ -89,6 +94,8 @@ final class CharacterCollectionViewCell: UICollectionViewCell {
         self.locationNameLabel.text = nil
         self.statusIndicatorView.backgroundColor = .systemBackground
         self.contentView.backgroundColor = .systemBackground
+        
+        self.cancellable?.cancel()
     }
     
     func configure(
@@ -96,24 +103,20 @@ final class CharacterCollectionViewCell: UICollectionViewCell {
         gender: CharacterGender,
         status: CharacterStatus
     ) {
+        avatarImageView.image = nil
         nameLabel.text = viewModel.name
         statusSpeciesGenderLabel.text = viewModel.statusSpeciesGender
         locationNameLabel.text = viewModel.locationName
         statusIndicatorView.backgroundColor = getStatusColor(by: status)
         contentView.backgroundColor = getBackgroundColor(by: gender)
-        
-        // Temp
-        avatarImageView.image = nil
-        guard let url = URL(string: viewModel.imageURL) else { return }
-
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
-            guard let self = self else { return }
-            guard let data = data, let image = UIImage(data: data) else { return }
-            DispatchQueue.main.async {
-                self.avatarImageView.image = image
+    }
+    
+    func bindAvatarImage(_ avatarImage: AnyPublisher<UIImage?, Never>) {
+        cancellable = avatarImage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] image in
+                self?.avatarImageView.image = image
             }
-        }
-        task.resume()
     }
 }
 
