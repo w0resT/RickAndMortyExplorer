@@ -82,6 +82,15 @@ final class CharacterCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Methods
     
+    override func prepareForReuse() {
+        self.avatarImageView.image = nil
+        self.nameLabel.text = nil
+        self.statusSpeciesGenderLabel.text = nil
+        self.locationNameLabel.text = nil
+        self.statusIndicatorView.backgroundColor = .systemBackground
+        self.contentView.backgroundColor = .systemBackground
+    }
+    
     func configure(
         with viewModel: CharacterCollectionViewCellViewModel,
         gender: CharacterGender,
@@ -90,32 +99,8 @@ final class CharacterCollectionViewCell: UICollectionViewCell {
         nameLabel.text = viewModel.name
         statusSpeciesGenderLabel.text = viewModel.statusSpeciesGender
         locationNameLabel.text = viewModel.locationName
-        
-        let backgroundColor: UIColor
-        switch gender {
-        case .male:
-            backgroundColor = UIColor.systemBlue.withAlphaComponent(0.3)
-        case .female:
-            backgroundColor = UIColor.systemPink.withAlphaComponent(0.3)
-        case .genderless:
-            backgroundColor = UIColor.systemYellow.withAlphaComponent(0.3)
-        case .unknown:
-            backgroundColor = UIColor.systemGray.withAlphaComponent(0.3)
-        }
-        
-        contentView.backgroundColor = backgroundColor
-        
-        let indicatorColor: UIColor
-        switch status {
-        case .alive:
-            indicatorColor = .systemGreen
-        case .dead:
-            indicatorColor = .systemRed
-        case .unknown:
-            indicatorColor = .systemGray
-        }
-        
-        statusIndicatorView.backgroundColor = indicatorColor
+        statusIndicatorView.backgroundColor = getStatusColor(by: status)
+        contentView.backgroundColor = getBackgroundColor(by: gender)
         
         // Temp
         avatarImageView.image = nil
@@ -208,5 +193,33 @@ private extension CharacterCollectionViewCell {
             locationTitleLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 12),
             locationTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12)
         ])
+    }
+}
+
+// MARK: - Helpers
+
+private extension CharacterCollectionViewCell {
+    func getBackgroundColor(by gender: CharacterGender) -> UIColor {
+        return switch gender {
+        case .male:
+            UIColor.systemBlue.withAlphaComponent(0.3)
+        case .female:
+            UIColor.systemPink.withAlphaComponent(0.3)
+        case .genderless:
+            UIColor.systemYellow.withAlphaComponent(0.3)
+        case .unknown:
+            UIColor.systemGray.withAlphaComponent(0.3)
+        }
+    }
+    
+    func getStatusColor(by status: CharacterStatus) -> UIColor {
+        return switch status {
+        case .alive:
+            .systemGreen
+        case .dead:
+            .systemRed
+        case .unknown:
+            .systemGray
+        }
     }
 }
