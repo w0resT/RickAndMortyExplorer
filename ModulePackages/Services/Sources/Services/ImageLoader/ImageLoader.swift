@@ -19,7 +19,6 @@ public actor ImageLoader: ImageLoaderProtocol {
     
     public func fetchImage(_ urlString: String) async throws -> Data {
         if let imageCacheData = dataCache.object(forKey: urlString as NSString) {
-            print("ImageLoader: return cache for \(urlString)")
             return imageCacheData as Data
         }
         
@@ -29,13 +28,11 @@ public actor ImageLoader: ImageLoaderProtocol {
         
         let request = URLRequest(url: urlRequest)
         if let task = tasks[request] {
-            print("ImageLoader: waiting for the task for \(urlString)")
             return try await task.value
         }
         
         let imageEndpoint = ImageEndpoint(urlString)
         let task = Task {
-            print("ImageLoader: fetching data for \(urlString)")
             let data = try await networkClient.request(imageEndpoint)
             return data
         }
@@ -48,8 +45,6 @@ public actor ImageLoader: ImageLoaderProtocol {
             imageData as NSData,
             forKey: urlString as NSString
         )
-        
-        print("ImageLoader: return data for \(urlString)")
         
         return imageData
     }
