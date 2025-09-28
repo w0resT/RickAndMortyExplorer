@@ -36,10 +36,6 @@ final class FooterLoadingCollectionReusableView: UICollectionReusableView {
     func stopAnimation() {
         loadingIndicator.stopAnimating()
     }
-    
-    func isAnimating() -> Bool {
-        return loadingIndicator.isAnimating
-    }
 }
 
 // MARK: - Setup UI
@@ -55,8 +51,8 @@ private extension FooterLoadingCollectionReusableView {
         }
         
         NSLayoutConstraint.activate([
-            loadingIndicator.heightAnchor.constraint(equalToConstant: 70),
-            loadingIndicator.widthAnchor.constraint(equalToConstant: 70),
+            loadingIndicator.heightAnchor.constraint(equalToConstant: 100),
+            loadingIndicator.widthAnchor.constraint(equalToConstant: 100),
             loadingIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
             loadingIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])

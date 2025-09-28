@@ -50,7 +50,7 @@ final class CharactersViewController: UIViewController {
         return search
     }()
     
-    private var footerLoadingView: FooterLoadingCollectionReusableView?
+    private var footerLoadingIndicator: FooterLoadingCollectionReusableView?
     
     // MARK: - Initialization
     
@@ -123,8 +123,8 @@ private extension CharactersViewController {
         }
         
         NSLayoutConstraint.activate([
-            loadingIndicator.heightAnchor.constraint(equalToConstant: 70),
-            loadingIndicator.widthAnchor.constraint(equalToConstant: 70),
+            loadingIndicator.heightAnchor.constraint(equalToConstant: 100),
+            loadingIndicator.widthAnchor.constraint(equalToConstant: 100),
             loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
@@ -140,10 +140,16 @@ private extension CharactersViewController {
     }
     
     func setupCharactersBinding() {
-        viewModel.$characters
+        viewModel.charactersChange
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.collectionView.reloadData()
+            .sink { [weak self] change in
+                switch change {
+                case .reload:
+                    self?.collectionView.reloadData()
+                    self?.collectionView.setContentOffset(.zero, animated: true)
+                case .append(let indexPaths):
+                    self?.collectionView.insertItems(at: indexPaths)
+                }
             }
             .store(in: &cancellables)
     }
@@ -162,15 +168,21 @@ private extension CharactersViewController {
 
 private extension CharactersViewController {
     func handleLoadingState(_ state: CharactersLoadingState) {
+        print("Loading state: \(state.rawValue)")
         switch state {
+        case .none:
+            break
         case .loading:
-            print("loading state")
+            loadingIndicator.startAnimating()
+        case .loadingNext:
+            break
         case .success:
-            print("success state")
             loadingIndicator.stopAnimating()
         case .error:
-            print("error state")
             loadingIndicator.stopAnimating()
+            footerLoadingIndicator?.stopAnimation()
+        case .cancelled:
+            break
         }
     }
     
@@ -243,7 +255,7 @@ extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDa
             return UICollectionReusableView()
         }
         
-        self.footerLoadingView = footer
+        self.footerLoadingIndicator = footer
                 
         return footer
     }
@@ -254,14 +266,14 @@ extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDa
         forElementKind elementKind: String,
         at indexPath: IndexPath
     ) {
-        guard elementKind == UICollectionView.elementKindSectionFooter else {
+        guard let footerView = view as? FooterLoadingCollectionReusableView else {
             return
         }
         
         if viewModel.isLastPageReached {
-            self.footerLoadingView?.stopAnimation()
+            footerView.stopAnimation()
         } else {
-            self.footerLoadingView?.startAnimating()
+            footerView.startAnimating()
         }
     }
     
@@ -271,13 +283,11 @@ extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDa
         forElementOfKind elementKind: String,
         at indexPath: IndexPath
     ) {
-        guard elementKind == UICollectionView.elementKindSectionFooter else {
+        guard let footerView = view as? FooterLoadingCollectionReusableView else {
             return
         }
         
-        print(self.footerLoadingView?.isAnimating())
-        
-        self.footerLoadingView?.stopAnimation()
+        footerView.stopAnimation()
     }
     
     func collectionView(
@@ -285,16 +295,17 @@ extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDa
         layout collectionViewLayout: UICollectionViewLayout,
         referenceSizeForFooterInSection section: Int
     ) -> CGSize {
-        guard viewModel.isLoadingMore else { return .zero }
+        guard !viewModel.isLastPageReached else { return .zero }
         
         return CGSize(
             width: collectionView.bounds.width,
-            height: 70
+            height: 100
         )
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard !viewModel.isLoadingMore,
+        guard viewModel.loadingState != .loading,
+              viewModel.loadingState != .loadingNext,
               !viewModel.isLastPageReached,
               !viewModel.characters.isEmpty
         else { return }

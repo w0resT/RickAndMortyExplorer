@@ -96,8 +96,8 @@ struct CharacterDetailsView<ViewModel: CharacterDetailsViewModelProtocol>: View 
     // temp
     private func statusColor(_ status: String) -> Color {
         switch status {
-        case "Alive": return .green
-        case "Dead": return .red
+        case "alive": return .green
+        case "dead": return .red
         default: return .gray
         }
     }

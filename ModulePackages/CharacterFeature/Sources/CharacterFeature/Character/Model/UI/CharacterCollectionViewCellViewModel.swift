@@ -10,7 +10,12 @@ extension CharacterCollectionViewCellViewModel {
     init(character: Character) {
         self.id = character.id
         self.name = character.name
-        self.statusSpeciesGender = "\(character.status.rawValue) - \(character.species) - \(character.gender.rawValue)"
+        
+        let status = character.status.rawValue.capitalized
+        let species = character.species
+        let gender = character.gender.rawValue.capitalized
+        self.statusSpeciesGender = "\(status) - \(species) - \(gender)"
+        
         self.locationName = character.location.name
         self.imageURL = character.image
     }

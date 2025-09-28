@@ -38,7 +38,8 @@ private extension CharacterCoordinator {
     func showCharactersList() {
         let (viewController, viewModel) = CharacterModuleBuilder.build(
             moduleOutput: self,
-            navigationOutput: self
+            navigationOutput: self,
+            services: services
         )
         
         self.moduleInput = viewModel
