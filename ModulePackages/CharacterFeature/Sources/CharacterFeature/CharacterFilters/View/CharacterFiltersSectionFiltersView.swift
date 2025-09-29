@@ -1,4 +1,5 @@
 import SwiftUI
+import ApplicationResources
 
 struct CharacterFiltersSectionFiltersView: View {
     
@@ -20,7 +21,7 @@ struct CharacterFiltersSectionFiltersView: View {
     // MARK: - Body Implementation
     
     var body: some View {
-        Section("Filters") {
+        Section(Localization.CharacterFilters.Section.filters) {
             characterStatus
             characterGender
         }
@@ -29,7 +30,7 @@ struct CharacterFiltersSectionFiltersView: View {
     // MARK: - Private
     
     private var characterStatus: some View {
-        Picker("Character status", selection: $status) {
+        Picker(Localization.CharacterFilters.status, selection: $status) {
             ForEach(CharacterFilterStatus.allCases, id: \.self) {
                 Text($0.title)
             }
@@ -37,7 +38,7 @@ struct CharacterFiltersSectionFiltersView: View {
     }
     
     private var characterGender: some View {
-        Picker("Character gender", selection: $gender) {
+        Picker(Localization.CharacterFilters.gender, selection: $gender) {
             ForEach(CharacterFilterGender.allCases, id: \.self) {
                 Text($0.title)
             }

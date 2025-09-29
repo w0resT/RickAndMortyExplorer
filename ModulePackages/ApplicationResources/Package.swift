@@ -4,32 +4,27 @@
 import PackageDescription
 
 let package = Package(
-    name: "CharacterFeature",
+    name: "ApplicationResources",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v16)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "CharacterFeature",
-            targets: ["CharacterFeature"]
+            name: "ApplicationResources",
+            targets: ["ApplicationResources"]
         ),
-    ],
-    dependencies: [
-        .package(path: "../ApplicationCore"),
-        .package(path: "../ApplicationResources"),
-        .package(path: "../Services")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "CharacterFeature",
-            dependencies: [
-                "ApplicationCore",
-                "ApplicationResources",
-                "Services"
+            name: "ApplicationResources",
+            resources: [
+                .process("Localization"),
+                .process("Assets.xcassets")
             ]
-        ),
+        )
     ]
 )

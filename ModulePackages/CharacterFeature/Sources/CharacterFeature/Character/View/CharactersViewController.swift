@@ -1,6 +1,7 @@
 import UIKit
 import Combine
 import ApplicationCore
+import ApplicationResources
 
 final class CharactersViewController: UIViewController {
     
@@ -56,7 +57,7 @@ private extension CharactersViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.searchController = charactersView.searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
-        self.title = "Characters"
+        self.title = Localization.Characters.title
         
         addFiltersButton()
     }
@@ -75,7 +76,7 @@ private extension CharactersViewController {
     
     func addFiltersButton() {
         let barButton = UIBarButtonItem(
-            title: "Filters",
+            title: Localization.Characters.Button.filter,
             image: nil,
             target: self,
             action: #selector(didTapFilters)

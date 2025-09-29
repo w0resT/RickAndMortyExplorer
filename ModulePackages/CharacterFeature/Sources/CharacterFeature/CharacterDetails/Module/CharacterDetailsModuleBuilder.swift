@@ -1,6 +1,7 @@
-import ApplicationCore
 import UIKit
 import SwiftUI
+import ApplicationCore
+import ApplicationResources
 
 internal final class CharacterDetailsModuleBuilder {
     internal static func build(
@@ -18,7 +19,7 @@ internal final class CharacterDetailsModuleBuilder {
         let hostingController = HostingController(rootView: view)
         hostingController.navigationListener = navigationListener
 
-        hostingController.title = "Character Details"
+        hostingController.title = Localization.CharacterDetails.title
         hostingController.navigationItem.largeTitleDisplayMode = .never
 
         return hostingController

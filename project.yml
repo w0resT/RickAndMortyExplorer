@@ -1,0 +1,81 @@
+name: RickAndMortyExplorer
+
+# Опции сборки
+options:
+  bundleIdPrefix: ru.w0rest
+  deploymentTarget:
+    iOS: '16.0'
+  generateInfoPlist: true
+
+# Конфигурации
+configs:
+  - name: Debug
+    type: debug
+  - name: Release
+    type: release
+
+# Общие настройки проекта
+settings:
+  base:
+    SWIFT_VERSION: '5.0'
+    
+# Описание таргетов
+targets:
+  RickAndMortyExplorer:
+    type: application
+    platform: iOS
+    supportedDestinations: [iOS]
+    deploymentTarget:
+      iOS: '16.0'
+    sources:
+      - path: RickAndMortyExplorer
+        exclude:
+          - Info.plist
+    resources:
+      - RickAndMortyExplorer/LaunchScreen.storyboard
+    info:
+        path: RickAndMortyExplorer/Info.plist
+        properties:
+          UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+          UILaunchStoryboardName: LaunchScreen
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: ru.w0rest.RickAndMortyExplorer
+    dependencies:
+      - package: ApplicationCore
+        product: ApplicationCore
+      - package: ApplicationModule
+        product: ApplicationModule
+      - package: ApplicationResources
+        product: ApplicationResources
+      - package: Services
+        product: Services
+      - package: CharacterFeature
+        product: CharacterFeature
+
+# Схемы
+schemes:
+  RickAndMortyExplorer:
+    build:
+      targets:
+        RickAndMortyExplorer: [test]
+    run:
+      config: Debug
+        
+# Локальные Swift Package модули
+packages:
+  ApplicationCore:
+    path: ModulePackages/ApplicationCore
+    group: ModulePackages
+  ApplicationModule:
+    path: ModulePackages/ApplicationModule
+    group: ModulePackages
+  ApplicationResources:
+    path: ModulePackages/ApplicationResources
+    group: ModulePackages
+  Services:
+    path: ModulePackages/Services
+    group: ModulePackages
+  CharacterFeature:
+    path: ModulePackages/CharacterFeature
+    group: ModulePackages

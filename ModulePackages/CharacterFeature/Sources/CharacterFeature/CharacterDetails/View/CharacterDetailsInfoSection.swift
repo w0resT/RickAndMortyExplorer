@@ -1,4 +1,5 @@
 import SwiftUI
+import ApplicationResources
 
 struct CharacterDetailsInfoSection: View {
     
@@ -17,12 +18,12 @@ struct CharacterDetailsInfoSection: View {
     var body: some View {
         VStack(spacing: 12) {
             CharacterDetailsInfoRow(
-                title: "Origin",
+                title: Localization.CharacterDetails.origin,
                 description: details.origin
             )
             
             CharacterDetailsInfoRow(
-                title: "Last known location",
+                title: Localization.CharacterDetails.location,
                 description: details.location
             )
         }
