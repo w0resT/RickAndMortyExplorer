@@ -1,6 +1,6 @@
 import Services
 
-public class CoordinatorFactory {
+public final class CoordinatorFactory {
     
     // MARK: - Properties
     

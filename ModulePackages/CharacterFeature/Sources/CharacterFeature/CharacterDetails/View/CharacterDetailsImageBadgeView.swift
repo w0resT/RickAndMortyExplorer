@@ -36,12 +36,9 @@ struct CharacterDetailsImageBadgeView: View {
     
     private func statusColor(_ status: CharacterDetailsStatus) -> Color {
         switch status {
-        case .alive:
-            return .green
-        case .dead:
-            return .red
-        case .unknown:
-            return .gray
+        case .alive: return .green
+        case .dead: return .red
+        case .unknown: return .gray
         }
     }
 }

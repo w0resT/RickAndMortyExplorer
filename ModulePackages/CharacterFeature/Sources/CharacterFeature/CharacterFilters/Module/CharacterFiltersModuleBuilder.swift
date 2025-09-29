@@ -2,8 +2,8 @@ import ApplicationCore
 import UIKit
 import SwiftUI
 
-final class CharacterFiltersModuleBuilder {
-    static func build(
+internal final class CharacterFiltersModuleBuilder {
+    internal static func build(
         moduleOutput: CharacterFiltersModuleOutputProtocol?,
         navigationOutput: CharacterFiltersNavigationListenerOutputProtocol?,
         initialData: CharacterFiltersInitialData

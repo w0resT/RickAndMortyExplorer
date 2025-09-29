@@ -1,6 +1,6 @@
 import UIKit
 
-final class CharacterDetailsPushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+internal final class CharacterDetailsPushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     // MARK: - Properties
     
@@ -8,7 +8,7 @@ final class CharacterDetailsPushAnimator: NSObject, UIViewControllerAnimatedTran
     
     // MARK: - Initialization
     
-    init(animationDuration: TimeInterval = 0.25) {
+    internal init(animationDuration: TimeInterval = 0.25) {
         self.animationDuration = animationDuration
     }
     
@@ -25,6 +25,7 @@ final class CharacterDetailsPushAnimator: NSObject, UIViewControllerAnimatedTran
         
         let containerView = transitionContext.containerView
         containerView.addSubview(toViewController.view)
+        
         toViewController.view.alpha = 0.0
         
         UIView.animate(withDuration: animationDuration) {

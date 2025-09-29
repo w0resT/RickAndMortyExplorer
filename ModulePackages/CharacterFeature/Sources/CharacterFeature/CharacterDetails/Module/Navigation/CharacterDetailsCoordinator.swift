@@ -5,12 +5,12 @@ public final class CharacterDetailsCoordinator<CharacterDetatailsParentCoordinat
     
     // MARK: - Properties
     
-    private var navigationDelegate: UINavigationControllerDelegate?
     private let services: DetailsModuleServices
+    private var navigationDelegate: UINavigationControllerDelegate?
     
     // MARK: - Initialization
     
-    init(
+    internal init(
         parentCoordinator: CharacterDetatailsParentCoordinator,
         services: DetailsModuleServices
     ) {

@@ -1,6 +1,6 @@
 import UIKit
 
-final class CharacterDetailsNavigationDelegate: NSObject, UINavigationControllerDelegate {
+internal final class CharacterDetailsNavigationDelegate: NSObject, UINavigationControllerDelegate {
     
     // MARK: - UINavigationControllerDelegate Methods
     
@@ -11,12 +11,9 @@ final class CharacterDetailsNavigationDelegate: NSObject, UINavigationController
         to toVC: UIViewController
     ) -> (any UIViewControllerAnimatedTransitioning)? {
         switch operation {
-        case .none:
-            return nil
-        case .push:
-            return CharacterDetailsPushAnimator()
-        case .pop:
-            return CharacterDetailsPopAnimator()
+        case .none: return nil
+        case .push: return CharacterDetailsPushAnimator()
+        case .pop: return CharacterDetailsPopAnimator()
         @unknown default:
             fatalError("Случай не определен!")
         }

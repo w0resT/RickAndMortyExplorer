@@ -1,19 +1,24 @@
 import Foundation
 
-enum CharacterFilterParameters: String {
+internal enum CharacterFilterParameters: String {
     case name
     case status
     case gender
 }
 
-struct CharactersEndpoint: EndpointProtocol {
-    var baseUrl: String
-    var path: String
-    var headers: [String : String]
-    var queryItems: [URLQueryItem]
-    var method: HTTPMethod
+internal struct CharactersEndpoint: EndpointProtocol {
     
-    init(
+    // MARK: - Properties
+    
+    internal var baseUrl: String
+    internal var path: String
+    internal var headers: [String : String]
+    internal var queryItems: [URLQueryItem]
+    internal var method: HTTPMethod
+    
+    // MARK: - Initialization
+    
+    internal init(
         nextURL: String?,
         searchQuery: String?,
         filters: CharacterFiltersRequest

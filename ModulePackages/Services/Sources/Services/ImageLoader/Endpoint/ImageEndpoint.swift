@@ -1,13 +1,18 @@
 import Foundation
 
-struct ImageEndpoint: EndpointProtocol {
-    var baseUrl: String
-    var path: String
-    var headers: [String : String]
-    var queryItems: [URLQueryItem]
-    var method: HTTPMethod
+internal struct ImageEndpoint: EndpointProtocol {
     
-    init(_ urlString: String) {
+    // MARK: - Properties
+    
+    internal var baseUrl: String
+    internal var path: String
+    internal var headers: [String : String]
+    internal var queryItems: [URLQueryItem]
+    internal var method: HTTPMethod
+    
+    // MARK: - Initialization
+    
+    internal init(_ urlString: String) {
         self.baseUrl = ""
         self.path = urlString
         self.headers = [:]

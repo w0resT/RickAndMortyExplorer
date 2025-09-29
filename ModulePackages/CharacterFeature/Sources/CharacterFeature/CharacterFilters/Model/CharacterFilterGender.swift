@@ -9,19 +9,16 @@ enum CharacterFilterGender: CaseIterable {
 extension CharacterFilterGender {
     var title: String {
         switch self {
-        case .none:
-            return "None"
-        case .male:
-            return "Male"
-        case .female:
-            return "Female"
-        case .genderless:
-            return "Genderless"
-        case .unknown:
-            return "Unknown"
+        case .none: return "None"
+        case .male: return "Male"
+        case .female: return "Female"
+        case .genderless: return "Genderless"
+        case .unknown: return "Unknown"
         }
     }
 }
+
+// MARK: - From CharacterGender to CharacterFilterGender
 
 extension CharacterFilterGender {
     init(from gender: CharacterGender?) {
@@ -31,29 +28,20 @@ extension CharacterFilterGender {
         }
         
         switch gender {
-        case .male:
-            self = .male
-        case .female:
-            self = .female
-        case .genderless:
-            self = .genderless
-        case .unknown:
-            self = .unknown
+        case .male: self = .male
+        case .female: self = .female
+        case .genderless: self = .genderless
+        case .unknown: self = .unknown
         }
     }
     
     var toCharacterGender: CharacterGender? {
         switch self {
-        case .none:
-            return nil
-        case .male:
-            return .male
-        case .female:
-            return .female
-        case .genderless:
-            return .genderless
-        case .unknown:
-            return .unknown
+        case .none: return nil
+        case .male: return .male
+        case .female: return .female
+        case .genderless: return .genderless
+        case .unknown: return .unknown
         }
     }
 }

@@ -1,6 +1,6 @@
 import UIKit
 
-final class CharacterDetailsPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+internal final class CharacterDetailsPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     // MARK: - Properties
     
@@ -8,7 +8,7 @@ final class CharacterDetailsPopAnimator: NSObject, UIViewControllerAnimatedTrans
     
     // MARK: - Initialization
     
-    init(animationDuration: TimeInterval = 0.25) {
+    internal init(animationDuration: TimeInterval = 0.25) {
         self.animationDuration = animationDuration
     }
     
@@ -20,15 +20,15 @@ final class CharacterDetailsPopAnimator: NSObject, UIViewControllerAnimatedTrans
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let toViewController = transitionContext.viewController(forKey: .to),
-              let fromViewController = transitionContext.viewController(forKey: .from) else {
-            return
-        }
+              let fromViewController = transitionContext.viewController(forKey: .from)
+        else { return }
         
         let containerView = transitionContext.containerView
         containerView.insertSubview(
             toViewController.view,
             belowSubview: fromViewController.view
         )
+        
         fromViewController.view.alpha = 1.0
         
         UIView.animate(withDuration: animationDuration) {

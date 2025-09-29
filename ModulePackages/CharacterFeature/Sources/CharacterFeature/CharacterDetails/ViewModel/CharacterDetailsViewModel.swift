@@ -1,5 +1,12 @@
 import Foundation
 
+protocol CharacterDetailsViewModelProtocol: ObservableObject {
+    var details: CharacterDetailsViewData { get }
+    var loadingState: CharactersDetailsLoadingState { get }
+}
+
+// MARK: - CharacterDetailsViewModelProtocol Implementation
+
 final class CharacterDetailsViewModel: CharacterDetailsViewModelProtocol {
     
     // MARK: - Properties

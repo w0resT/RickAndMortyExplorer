@@ -1,6 +1,6 @@
 import Foundation
 
-final class MockCharacterFiltersViewModel: CharacterFiltersViewModelProtocol {
+final class MockCharacterFiltersViewModel: CharacterFiltersViewModelProtocol, CharacterFiltersViewModelInputProtocol {
     
     // MARK: - Properties
     

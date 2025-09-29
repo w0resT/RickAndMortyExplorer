@@ -1,6 +1,9 @@
 import SwiftUI
 
-struct CharacterFiltersView<ViewModel: CharacterFiltersViewModelProtocol>: View {
+typealias CharacterFiltersVM = CharacterFiltersViewModelProtocol
+    & CharacterFiltersViewModelInputProtocol
+
+struct CharacterFiltersView<ViewModel: CharacterFiltersVM>: View {
     
     // MARK: - Private Properties
     

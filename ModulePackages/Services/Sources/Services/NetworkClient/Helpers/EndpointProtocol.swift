@@ -19,9 +19,8 @@ public extension EndpointProtocol {
         components?.path = path
 
         guard let finalURL = components?.url,
-                finalURL.scheme?.hasPrefix("http") == true else {
-            return nil
-        }
+                finalURL.scheme?.hasPrefix("http") == true
+        else { return nil }
 
         return finalURL
     }

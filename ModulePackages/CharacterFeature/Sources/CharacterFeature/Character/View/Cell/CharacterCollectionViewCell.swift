@@ -194,25 +194,18 @@ private extension CharacterCollectionViewCell {
 private extension CharacterCollectionViewCell {
     func getBackgroundColor(by gender: CharacterGender) -> UIColor {
         return switch gender {
-        case .male:
-            UIColor.systemBlue.withAlphaComponent(0.3)
-        case .female:
-            UIColor.systemPink.withAlphaComponent(0.3)
-        case .genderless:
-            UIColor.systemYellow.withAlphaComponent(0.3)
-        case .unknown:
-            UIColor.systemGray.withAlphaComponent(0.3)
+        case .male: UIColor.systemBlue.withAlphaComponent(0.3)
+        case .female: UIColor.systemPink.withAlphaComponent(0.3)
+        case .genderless: UIColor.systemYellow.withAlphaComponent(0.3)
+        case .unknown: UIColor.systemGray.withAlphaComponent(0.3)
         }
     }
     
     func getStatusColor(by status: CharacterStatus) -> UIColor {
         return switch status {
-        case .alive:
-            .systemGreen
-        case .dead:
-            .systemRed
-        case .unknown:
-            .systemGray
+        case .alive: .systemGreen
+        case .dead: .systemRed
+        case .unknown: .systemGray
         }
     }
 }

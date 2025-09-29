@@ -8,17 +8,15 @@ enum CharacterFilterStatus: CaseIterable {
 extension CharacterFilterStatus {
     var title: String {
         switch self {
-        case .none:
-            return "None"
-        case .alive:
-            return "Alive"
-        case .dead:
-            return "Dead"
-        case .unknown:
-            return "Unknown"
+        case .none: return "None"
+        case .alive: return "Alive"
+        case .dead: return "Dead"
+        case .unknown: return "Unknown"
         }
     }
 }
+
+// MARK: - From CharacterStatus to CharacterFilterStatus
 
 extension CharacterFilterStatus {
     init(from status: CharacterStatus?) {
@@ -28,25 +26,18 @@ extension CharacterFilterStatus {
         }
         
         switch status {
-        case .alive:
-            self = .alive
-        case .dead:
-            self = .dead
-        case .unknown:
-            self = .unknown
+        case .alive: self = .alive
+        case .dead: self = .dead
+        case .unknown: self = .unknown
         }
     }
     
     var toCharacterStatus: CharacterStatus? {
         switch self {
-        case .none:
-            return nil
-        case .alive:
-            return .alive
-        case .dead:
-            return .dead
-        case .unknown:
-            return .unknown
+        case .none: return nil
+        case .alive: return .alive
+        case .dead: return .dead
+        case .unknown: return .unknown
         }
     }
 }

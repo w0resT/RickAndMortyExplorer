@@ -1,6 +1,6 @@
 import Foundation
 
-enum CharactersChange {
+enum CharactersChangeEvent {
     case reload
     case append(indexPaths: [IndexPath])
 }

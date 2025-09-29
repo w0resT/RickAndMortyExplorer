@@ -1,28 +1,52 @@
 import Foundation
 import Combine
 
-final class CharactersViewModel {
+protocol CharactersViewModelProtocol {
+    var characters: [Character] { get }
+    var charactersInfo: Info? { get }
+    var loadingState: CharactersLoadingState { get }
+    var errorMessage: String? { get }
+    var searchQuery: String { get set }
     
-    // MARK: - Properties
+    var didCharactersChange: AnyPublisher<CharactersChangeEvent, Never> { get }
+    var didImageLoad: AnyPublisher<CharactersImageLoadEvent, Never> { get }
+}
+
+// MARK: - CharactersViewModelProtocol Implementation
+
+final class CharactersViewModel: CharactersViewModelProtocol {
+    
+    // MARK: - State
 
     @Published private(set) var characters: [Character]
-    @Published private(set) var info: Info?
+    @Published private(set) var charactersInfo: Info?
     @Published private(set) var loadingState: CharactersLoadingState
     @Published private(set) var errorMessage: String?
     @Published var searchQuery: String
-    internal let charactersChange = PassthroughSubject<CharactersChange, Never>()
-    internal let imageLoads = PassthroughSubject<(id: Int, data: Data), Never>()
+    
+    // MARK: - Events
+    
+    private let didCharactersChangeSubject = PassthroughSubject<CharactersChangeEvent, Never>()
+    var didCharactersChange: AnyPublisher<CharactersChangeEvent, Never> {
+        return didCharactersChangeSubject.eraseToAnyPublisher()
+    }
+    
+    private let didImageLoadSubject = PassthroughSubject<CharactersImageLoadEvent, Never>()
+    var didImageLoad: AnyPublisher<CharactersImageLoadEvent, Never> {
+        return didImageLoadSubject.eraseToAnyPublisher()
+    }
+    
+    // MARK: - Properties
     
     private weak var moduleOutput: CharacterModuleOutputProtocol?
     private let services: CharacterModuleServices
     
     private var cancellables = Set<AnyCancellable>()
     private var characterFilters: CharacterFilters
-    
     private var loadingTask: Task<Void, Never>?
     
     var isLastPageReached: Bool {
-        return info?.next == nil
+        return charactersInfo?.next == nil
     }
     
     // MARK: - Initialization
@@ -34,7 +58,7 @@ final class CharactersViewModel {
         self.moduleOutput = moduleOutput
         self.services = services
         
-        self.info = nil
+        self.charactersInfo = nil
         self.characters = []
         self.loadingState = .none
         self.searchQuery = ""
@@ -51,9 +75,11 @@ final class CharactersViewModel {
     deinit {
         loadingTask?.cancel()
     }
-    
-    // MARK: - Methods
-    
+}
+
+// MARK: - Helpers
+
+private extension CharactersViewModel {
     func setupBindings() {
         $searchQuery
             .dropFirst(2)
@@ -66,72 +92,32 @@ final class CharactersViewModel {
             .store(in: &cancellables)
     }
     
-    func loadMoreCharacters() {
+    func startLoading(
+        nextURL: String? = nil,
+        searchQuery: String? = nil,
+        append: Bool = false
+    ) {
         self.loadingTask?.cancel()
         self.loadingTask = Task { [weak self] in
-            let nextURL = self?.info?.next
             await self?.fetchCharacters(
                 nextURL: nextURL,
-                append: true
+                searchQuery: searchQuery,
+                append: append
             )
         }
     }
     
-    func loadImage(for character: Character) {
-        let urlString = character.image
-        
-        Task { [weak self] in
-            do {
-                guard let imageData = try await self?.services.imageLoader.fetchImage(urlString) else {
-                    return
-                }
-                
-                await MainActor.run { [weak self] in
-                    self?.imageLoads.send((id: character.id, data: imageData))
-                }
-            } catch {
-                print("Image loading for id '\(character.id)' error: ")
-            }
-        }
-    }
-    
-    func didSelectCharacter(_ character: Character) {
-        moduleOutput?.showCharacterDetails(character: character)
-    }
-    
-    func didTapFilters() {
-        moduleOutput?.showCharacterFilters(filters: characterFilters)
-    }
-}
-
-// MARK: - Helpers
-
-private extension CharactersViewModel {
     func loadCharactersInitial() {
-        self.loadingTask = Task { [weak self] in
-            await self?.fetchCharacters()
-        }
+        startLoading()
     }
     
     func loadWithFilters() {
-        self.loadingTask?.cancel()
-        self.loadingTask = Task { [weak self] in
-            let searchQuery = self?.searchQuery.isEmpty == true ? nil : self?.searchQuery
-            await self?.fetchCharacters(
-                searchQuery: searchQuery,
-                append: false
-            )
-        }
+        let searchQuery = searchQuery.isEmpty == true ? nil : searchQuery
+        startLoading(searchQuery: searchQuery)
     }
     
     func loadWithSearch(query: String) {
-        self.loadingTask?.cancel()
-        self.loadingTask = Task { [weak self] in
-            await self?.fetchCharacters(
-                searchQuery: query,
-                append: false
-            )
-        }
+        startLoading(searchQuery: query)
     }
     
     @MainActor
@@ -141,7 +127,6 @@ private extension CharactersViewModel {
         append: Bool = false
     ) async {
         if self.loadingState == .loading || self.loadingState == .loadingNext {
-            print("already loading")
             return
         }
     
@@ -160,33 +145,69 @@ private extension CharactersViewModel {
                     gender: characterFilters.gender?.rawValue
                 )
             )
+            self.charactersInfo = .init(from: responseCharacters.info)
             
             let newCharacters = responseCharacters.results.map { Character(from: $0) }
-            
-            self.info = .init(from: responseCharacters.info)
-            
             if append {
                 let startIndex = characters.count
                 let endIndex = startIndex + newCharacters.count
                 let indexPaths = (startIndex..<endIndex).map { IndexPath(item: $0, section: 0) }
                 
                 self.characters.append(contentsOf: newCharacters)
-                self.charactersChange.send(.append(indexPaths: indexPaths))
+                self.didCharactersChangeSubject.send(.append(indexPaths: indexPaths))
                 self.loadingState = .success
             } else {
                 self.characters = newCharacters
-                self.charactersChange.send(.reload)
+                self.didCharactersChangeSubject.send(.reload)
                 self.loadingState = .success
             }
         } catch is CancellationError {
-            print("loadingTask cancelled")
             self.loadingState = .cancelled
+            print("fetchCharacters cancelled")
         } catch {
             let localizedError = error.localizedDescription
             print(localizedError)
             self.errorMessage = localizedError
             self.loadingState = .error
         }
+    }
+}
+
+// MARK: - CharactersViewModelInputProtocol
+
+extension CharactersViewModel: CharactersViewModelInputProtocol {
+    func loadMoreCharacters() {
+        let nextURL = charactersInfo?.next
+        startLoading(
+            nextURL: nextURL,
+            append: true)
+        
+    }
+    
+    func loadImage(for character: Character) {
+        let urlString = character.image
+        
+        Task { [weak self] in
+            do {
+                guard let imageData = try await self?.services.imageLoader.fetchImage(urlString) else {
+                    return
+                }
+                
+                await MainActor.run { [weak self] in
+                    self?.didImageLoadSubject.send(.loaded(id: character.id, data: imageData))
+                }
+            } catch {
+                print("Image loading for id '\(character.id)' error: ")
+            }
+        }
+    }
+    
+    func didSelectCharacter(_ character: Character) {
+        moduleOutput?.showCharacterDetails(character: character)
+    }
+    
+    func didTapFilters() {
+        moduleOutput?.showCharacterFilters(filters: characterFilters)
     }
 }
 
