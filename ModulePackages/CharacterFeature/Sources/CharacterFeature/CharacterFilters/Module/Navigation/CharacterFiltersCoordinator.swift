@@ -1,6 +1,8 @@
 import ApplicationCore
 
-public final class CharacterFiltersCoordinator<CharacterFiltersParentCoordinator: CharacterFiltersParentCoordinatorProtocol>: Coordinator<CharacterFiltersParentCoordinator> {
+// swiftlint:disable:next generic_type_name line_length
+public final class CharacterFiltersCoordinator<CharacterFiltersParentCoordinator: CharacterFiltersParentCoordinatorProtocol>:
+    Coordinator<CharacterFiltersParentCoordinator> {
     
     // MARK: - Methods
     
@@ -38,4 +40,3 @@ extension CharacterFiltersCoordinator: CharacterFiltersModuleOutputProtocol {
         self.parentCoordinator?.applyFilters(filters: filters)
     }
 }
-

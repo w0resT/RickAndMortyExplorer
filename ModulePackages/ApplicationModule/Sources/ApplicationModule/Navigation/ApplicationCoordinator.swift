@@ -1,7 +1,9 @@
 import ApplicationCore
 import CharacterFeature
 
-public final class ApplicationCoordinator<ApplicationParentCoordinator: ApplicationParentCoordinatorProtocol>: Coordinator<ApplicationParentCoordinator> {
+// swiftlint:disable:next generic_type_name
+public final class ApplicationCoordinator<ApplicationParentCoordinator: ApplicationParentCoordinatorProtocol>:
+    Coordinator<ApplicationParentCoordinator> {
     
     // MARK: - Types
     public typealias Module = CharacterModuleProtocol

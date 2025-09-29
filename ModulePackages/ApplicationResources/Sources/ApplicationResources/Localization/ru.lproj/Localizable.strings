@@ -1,0 +1,23 @@
+"character.alive" = "Живой";
+"character.dead" = "Мертвый";
+"character.male" = "Мужчина";
+"character.female" = "Женщина";
+"character.genderless" = "Без пола";
+"character.unknown" = "Неизвестно";
+"character.none" = "Нет";
+
+"characters.title" = "Персонажи";
+"characters.button.filter" = "Фильтр";
+"characters.search.placeholder" = "Поиск персонажей";
+"characters.cell.location.title" = "Местоположение:";
+
+"characterDetails.title" = "Детали персонажа";
+"characterDetails.origin" = "Происхождение";
+"characterDetails.location" = "Местоположени";
+
+"characterFilters.title" = "Фильтры персонажей";
+"characterFilters.section.filters" = "Фильтры";
+"characterFilters.status" = "Статус персонажа";
+"characterFilters.gender" = "Пол персонажа";
+"characterFilters.button.reset" = "Сбросить";
+"characterFilters.button.apply" = "Применить";

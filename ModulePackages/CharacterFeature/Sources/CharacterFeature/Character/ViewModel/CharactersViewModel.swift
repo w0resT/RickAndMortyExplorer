@@ -74,7 +74,6 @@ final class CharactersViewModel: CharactersViewModelProtocol {
     }
 }
 
-
 // MARK: - CharactersViewModelInputProtocol
 
 extension CharactersViewModel: CharactersViewModelInputProtocol {

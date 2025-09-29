@@ -1,3 +1,5 @@
+import ApplicationResources
+
 enum CharacterFilterStatus: CaseIterable {
     case none
     case alive
@@ -8,10 +10,10 @@ enum CharacterFilterStatus: CaseIterable {
 extension CharacterFilterStatus {
     var title: String {
         switch self {
-        case .none: return "None"
-        case .alive: return "Alive"
-        case .dead: return "Dead"
-        case .unknown: return "Unknown"
+        case .none: return Localization.Character.none
+        case .alive: return Localization.Character.alive
+        case .dead: return Localization.Character.dead
+        case .unknown: return Localization.Character.unknown
         }
     }
 }

@@ -1,4 +1,5 @@
 import SwiftUI
+import ApplicationResources
 
 struct CharacterFiltersHeaderView: View {
     
@@ -21,12 +22,12 @@ struct CharacterFiltersHeaderView: View {
     
     var body: some View {
         HStack {
-            Button("Reset", action: onReset)
+            Button(Localization.CharacterFilters.Button.reset, action: onReset)
                 .padding()
             
             Spacer()
             
-            Button("Apply", action: onApply)
+            Button(Localization.CharacterFilters.Button.apply, action: onApply)
                 .padding()
         }
         .padding(.horizontal, 15)

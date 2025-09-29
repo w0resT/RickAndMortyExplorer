@@ -1,3 +1,5 @@
+import ApplicationResources
+
 enum CharacterFilterGender: CaseIterable {
     case none
     case male
@@ -9,11 +11,11 @@ enum CharacterFilterGender: CaseIterable {
 extension CharacterFilterGender {
     var title: String {
         switch self {
-        case .none: return "None"
-        case .male: return "Male"
-        case .female: return "Female"
-        case .genderless: return "Genderless"
-        case .unknown: return "Unknown"
+        case .none: return Localization.Character.none
+        case .male: return Localization.Character.male
+        case .female: return Localization.Character.female
+        case .genderless: return Localization.Character.genderless
+        case .unknown: return Localization.Character.unknown
         }
     }
 }

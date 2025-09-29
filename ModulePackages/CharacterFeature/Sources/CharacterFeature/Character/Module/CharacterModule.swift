@@ -1,3 +1,5 @@
+// swiftlint:disable generic_type_name
+
 import ApplicationCore
 import Services
 
@@ -21,4 +23,3 @@ extension CoordinatorFactory: CharacterModuleProtocol {
         )
     }
 }
-

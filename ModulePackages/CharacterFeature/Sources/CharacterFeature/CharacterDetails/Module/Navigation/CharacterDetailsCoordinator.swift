@@ -1,7 +1,9 @@
 import UIKit
 import ApplicationCore
 
-public final class CharacterDetailsCoordinator<CharacterDetatailsParentCoordinator: CharacterDetailsParentCoordinatorProtocol>: Coordinator<CharacterDetatailsParentCoordinator> {
+// swiftlint:disable:next generic_type_name line_length
+public final class CharacterDetailsCoordinator<CharacterDetatailsParentCoordinator: CharacterDetailsParentCoordinatorProtocol>:
+    Coordinator<CharacterDetatailsParentCoordinator> {
     
     // MARK: - Properties
     

@@ -1,10 +1,20 @@
-enum CharacterDetailsStatus: String {
-    case alive = "Alive"
-    case dead = "Dead"
-    case unknown = "Unknown"
+import ApplicationResources
+
+enum CharacterDetailsStatus {
+    case alive
+    case dead
+    case unknown
 }
 
 extension CharacterDetailsStatus {
+    var title: String {
+        switch self {
+        case .alive: return Localization.Character.alive
+        case .dead: return Localization.Character.dead
+        case .unknown: return Localization.Character.unknown
+        }
+    }
+    
     init(from character: CharacterStatus) {
         switch character {
         case .alive: self = .alive

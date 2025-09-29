@@ -1,3 +1,5 @@
+// swiftlint:disable generic_type_name
+
 import ApplicationCore
 
 public protocol CharacterFiltersModuleProtocol: AnyObject {
@@ -9,7 +11,7 @@ public protocol CharacterFiltersModuleProtocol: AnyObject {
 extension CoordinatorFactory: CharacterFiltersModuleProtocol {
     public func makeCharacterFiltersCoordinator<CharacterFiltersParentCoordinator>(
         parentCoordinator: CharacterFiltersParentCoordinator
-    ) -> CharacterFiltersCoordinator<CharacterFiltersParentCoordinator>{
+    ) -> CharacterFiltersCoordinator<CharacterFiltersParentCoordinator> {
         return CharacterFiltersCoordinator(
             parentCoordinator: parentCoordinator
         )

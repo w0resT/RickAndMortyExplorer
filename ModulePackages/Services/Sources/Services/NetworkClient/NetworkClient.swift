@@ -34,8 +34,8 @@ public class NetworkClient: NetworkClientProtocol {
         var request = URLRequest(url: endpointURL)
         request.httpMethod = endpoint.method.rawValue
         
-        for (key, value) in endpoint.headers {
-            request.addValue(value, forHTTPHeaderField: key)
+        for (field, value) in endpoint.headers {
+            request.addValue(value, forHTTPHeaderField: field)
         }
 
         let (data, response) = try await urlSession.data(for: request)
@@ -65,4 +65,3 @@ private extension NetworkClient {
         }
     }
 }
-

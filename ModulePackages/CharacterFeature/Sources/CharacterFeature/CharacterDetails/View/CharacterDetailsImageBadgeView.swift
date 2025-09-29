@@ -20,7 +20,7 @@ struct CharacterDetailsImageBadgeView: View {
                 .fill(statusColor(status))
                 .frame(width: 10, height: 10)
             
-            Text("\(status.rawValue)")
+            Text("\(status.title)")
                 .font(.headline)
                 .fontWeight(.semibold)
                 .foregroundColor(.white)

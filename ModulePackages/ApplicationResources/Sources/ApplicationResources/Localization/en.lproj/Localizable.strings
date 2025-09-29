@@ -1,0 +1,23 @@
+"character.alive" = "Alive";
+"character.dead" = "Dead";
+"character.male" = "Male";
+"character.female" = "Female";
+"character.genderless" = "Genderless";
+"character.unknown" = "Unknown";
+"character.none" = "None";
+
+"characters.title" = "Characters";
+"characters.button.filter" = "Filters";
+"characters.search.placeholder" = "Search characters";
+"characters.cell.location.title" = "Last known location:";
+
+"characterDetails.title" = "Character Details";
+"characterDetails.origin" = "Origin";
+"characterDetails.location" = "Last known location";
+
+"characterFilters.title" = "Character Filters";
+"characterFilters.section.filters" = "Filters";
+"characterFilters.status" = "Character status";
+"characterFilters.gender" = "Character gender";
+"characterFilters.button.reset" = "Reset";
+"characterFilters.button.apply" = "Apply";

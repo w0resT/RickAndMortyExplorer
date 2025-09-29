@@ -17,7 +17,7 @@ extension CharacterDetailsViewData {
         self.name = character.name
         self.status =  .init(from: character.status)
         self.species = character.species
-        self.gender = character.gender.rawValue.capitalized
+        self.gender = character.gender.title
         self.origin = character.origin.name
         self.location = character.location.name
         self.imageData = nil

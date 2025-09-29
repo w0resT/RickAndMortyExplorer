@@ -1,6 +1,7 @@
 import UIKit
 import Combine
 import ApplicationCore
+import ApplicationResources
 
 final class CharactersViewController: UIViewController {
     
@@ -10,7 +11,7 @@ final class CharactersViewController: UIViewController {
     
     private let viewModel: CharactersViewModel
     private var cancellables = Set<AnyCancellable>()
-    private var collectionViewDelegate: CharactersUICollectionViewDelegate
+    private var collectionViewDelegate: CharactersCollectionViewDelegate
     
     // MARK: - UI Elements
     
@@ -25,7 +26,7 @@ final class CharactersViewController: UIViewController {
         self.navigationOutput = navigationOutput
         self.viewModel = viewModel
         
-        self.collectionViewDelegate = CharactersUICollectionViewDelegate(viewModel: viewModel)
+        self.collectionViewDelegate = CharactersCollectionViewDelegate(viewModel: viewModel)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -56,7 +57,7 @@ private extension CharactersViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.searchController = charactersView.searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
-        self.title = "Characters"
+        self.title = Localization.Characters.title
         
         addFiltersButton()
     }
@@ -75,7 +76,7 @@ private extension CharactersViewController {
     
     func addFiltersButton() {
         let barButton = UIBarButtonItem(
-            title: "Filters",
+            title: Localization.Characters.Button.filter,
             image: nil,
             target: self,
             action: #selector(didTapFilters)
@@ -125,9 +126,9 @@ private extension CharactersViewController {
     }
 }
 
-// MARK: - CharactersUICollectionViewDelegateOutputProtocol
+// MARK: - CharactersCollectionViewDelegateProtocol
 
-extension CharactersViewController: CharactersUICollectionViewDelegateOutputProtocol {
+extension CharactersViewController: CharactersCollectionViewDelegateProtocol {
     func didCreateFooterView(_ footer: FooterLoadingCollectionReusableView) {
         charactersView.footerLoadingIndicator = footer
     }

@@ -8,7 +8,6 @@ struct CharacterDetailsIdentityView: View {
     private let species: String
     private let gender: String
     
-
     // MARK: - Initialization
     
     init(

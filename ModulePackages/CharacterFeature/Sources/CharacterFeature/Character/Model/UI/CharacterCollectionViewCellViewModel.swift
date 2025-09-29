@@ -11,9 +11,9 @@ extension CharacterCollectionViewCellViewModel {
         self.id = character.id
         self.name = character.name
         
-        let status = character.status.rawValue.capitalized
+        let status = character.status.title
         let species = character.species
-        let gender = character.gender.rawValue.capitalized
+        let gender = character.gender.title
         self.statusSpeciesGender = "\(status) - \(species) - \(gender)"
         
         self.locationName = character.location.name

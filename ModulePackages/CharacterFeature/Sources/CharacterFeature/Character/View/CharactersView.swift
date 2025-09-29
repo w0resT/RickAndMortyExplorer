@@ -1,4 +1,5 @@
 import UIKit
+import ApplicationResources
 
 final class CharactersView: UIView {
     
@@ -34,7 +35,7 @@ final class CharactersView: UIView {
     
     lazy var searchController: UISearchController = {
         let search = UISearchController(searchResultsController: nil)
-        search.searchBar.placeholder = "Search characters"
+        search.searchBar.placeholder = Localization.Characters.Search.placeholder
         return search
     }()
     

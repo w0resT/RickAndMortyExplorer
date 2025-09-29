@@ -1,5 +1,6 @@
 import UIKit
 import Combine
+import ApplicationResources
 
 final class CharacterCollectionViewCell: UICollectionViewCell {
     
@@ -40,7 +41,7 @@ final class CharacterCollectionViewCell: UICollectionViewCell {
     private let locationTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.text = "Last known location:"
+        label.text = Localization.Characters.Cell.Location.title
         label.textColor = .secondaryLabel
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

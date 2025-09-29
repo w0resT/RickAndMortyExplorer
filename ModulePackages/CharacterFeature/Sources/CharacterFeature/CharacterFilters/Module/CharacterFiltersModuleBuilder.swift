@@ -1,6 +1,7 @@
-import ApplicationCore
 import UIKit
 import SwiftUI
+import ApplicationCore
+import ApplicationResources
 
 internal final class CharacterFiltersModuleBuilder {
     internal static func build(
@@ -18,11 +19,10 @@ internal final class CharacterFiltersModuleBuilder {
         let hostingController = HostingController(rootView: view)
         hostingController.navigationListener = navigationListener
 
-        hostingController.title = "Character Filters"
+        hostingController.title = Localization.CharacterFilters.title
         hostingController.navigationItem.largeTitleDisplayMode = .never
         hostingController.sheetPresentationController?.delegate = navigationListener
 
         return hostingController
     }
 }
-

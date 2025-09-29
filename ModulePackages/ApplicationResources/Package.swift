@@ -4,22 +4,27 @@
 import PackageDescription
 
 let package = Package(
-    name: "Services",
+    name: "ApplicationResources",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v16)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "Services",
-            targets: ["Services"]
+            name: "ApplicationResources",
+            targets: ["ApplicationResources"]
         )
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Services"
+            name: "ApplicationResources",
+            resources: [
+                .process("Localization"),
+                .process("Assets.xcassets")
+            ]
         )
     ]
 )
