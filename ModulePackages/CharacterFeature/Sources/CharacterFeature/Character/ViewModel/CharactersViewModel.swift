@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import OSLog
 
 protocol CharactersViewModelProtocol {
     var characters: [Character] { get }
@@ -197,10 +198,9 @@ private extension CharactersViewModel {
             }
         } catch is CancellationError {
             self.loadingState = .cancelled
-            print("fetchCharacters cancelled")
         } catch {
             let localizedError = error.localizedDescription
-            print(localizedError)
+            Logger.characters.error("\(localizedError)")
             self.errorMessage = localizedError
             self.loadingState = .error
         }
@@ -219,7 +219,8 @@ private extension CharactersViewModel {
                     self?.didImageLoadSubject.send(.loaded(id: character.id, data: imageData))
                 }
             } catch {
-                print("Image loading for id '\(character.id)' error: ")
+                let localizedError = error.localizedDescription
+                Logger.characters.error("Image loading for id '\(character.id)': \(localizedError)")
             }
         }
     }

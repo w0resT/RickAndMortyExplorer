@@ -1,4 +1,5 @@
 import Foundation
+import OSLog
 
 protocol CharacterDetailsViewModelProtocol: ObservableObject {
     var details: CharacterDetailsViewData { get }
@@ -55,11 +56,10 @@ private extension CharacterDetailsViewModel {
             
             self.loadingState = .success
         } catch is CancellationError {
-            print("fetchImage cancelled")
             self.loadingState = .cancelled
         } catch {
             let localizedError = error.localizedDescription
-            print(localizedError)
+            Logger.characterDetails.error("\(localizedError)")
             self.loadingState = .error
         }
     }
