@@ -1,3 +1,5 @@
+// swiftlint:disable generic_type_name
+
 import ApplicationCore
 import Services
 
@@ -12,7 +14,7 @@ public protocol CharacterDetailsModuleProtocol: AnyObject {
 extension CoordinatorFactory: CharacterDetailsModuleProtocol {
     public func makeCharacterDetailsCoordinator<CharacterDetailsParentCoordinator>(
         parentCoordinator: CharacterDetailsParentCoordinator
-    ) -> CharacterDetailsCoordinator<CharacterDetailsParentCoordinator>{
+    ) -> CharacterDetailsCoordinator<CharacterDetailsParentCoordinator> {
         return CharacterDetailsCoordinator(
             parentCoordinator: parentCoordinator,
             services: services

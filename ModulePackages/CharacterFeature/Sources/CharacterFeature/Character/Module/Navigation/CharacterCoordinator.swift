@@ -1,6 +1,8 @@
 import ApplicationCore
 
-public final class CharacterCoordinator<CharacterParentCoordinator: CharacterParentCoordinatorProtocol>: Coordinator<CharacterParentCoordinator> {
+// swiftlint:disable:next generic_type_name
+public final class CharacterCoordinator<CharacterParentCoordinator: CharacterParentCoordinatorProtocol>:
+    Coordinator<CharacterParentCoordinator> {
     
     // MARK: - Types
     

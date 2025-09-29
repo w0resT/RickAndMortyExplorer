@@ -19,4 +19,3 @@ public final class CharacterNavigationListener: NSObject, NavigationListenerProt
         output?.viewControllerDidDisappear()
     }
 }
-

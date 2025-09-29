@@ -13,7 +13,7 @@ let package = Package(
         .library(
             name: "ApplicationCore",
             targets: ["ApplicationCore"]
-        ),
+        )
     ],
     dependencies: [
         .package(path: "../Services")
@@ -26,6 +26,6 @@ let package = Package(
             dependencies: [
                 "Services"
             ]
-        ),
+        )
     ]
 )

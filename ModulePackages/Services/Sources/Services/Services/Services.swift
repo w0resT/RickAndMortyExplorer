@@ -2,7 +2,6 @@ public typealias Services = HasNetworkClient
     & HasCharacterService
     & HasImageLoader
 
-
 public protocol HasNetworkClient {
     var networkClient: NetworkClientProtocol { get }
 }

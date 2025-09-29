@@ -1,3 +1,5 @@
+// swiftlint:disable generic_type_name
+
 import ApplicationCore
 
 public protocol ApplicationModuleProtocol: AnyObject {

@@ -56,4 +56,3 @@ struct CharacterFiltersSectionFiltersView: View {
     }
 }
 #endif
-

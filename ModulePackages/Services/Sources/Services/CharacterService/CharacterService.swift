@@ -26,7 +26,7 @@ public class CharacterService: CharacterServiceProtocol {
         nextURL: String?,
         searchQuery: String?,
         filters: CharacterFiltersRequest
-    ) async throws -> GetAllCharactersResponse{
+    ) async throws -> GetAllCharactersResponse {
         let charactersEndpoint = CharactersEndpoint(
             nextURL: nextURL,
             searchQuery: searchQuery,

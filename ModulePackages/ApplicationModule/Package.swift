@@ -13,7 +13,7 @@ let package = Package(
         .library(
             name: "ApplicationModule",
             targets: ["ApplicationModule"]
-        ),
+        )
     ],
     dependencies: [
         .package(path: "../ApplicationCore"),
@@ -28,6 +28,6 @@ let package = Package(
                 "ApplicationCore",
                 "CharacterFeature"
             ]
-        ),
+        )
     ]
 )

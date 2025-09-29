@@ -2,12 +2,12 @@ import UIKit
 
 // MARK: - UICollectionViewDelegate & UICollectionViewDataSource
 
-final class CharactersUICollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
+final class CharactersCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
     
     // MARK: - Properties
     
     private let viewModel: CharactersViewModel
-    weak var output: CharactersUICollectionViewDelegateOutputProtocol?
+    weak var output: CharactersCollectionViewDelegateProtocol?
     
     // MARK: - Initialization
     
@@ -127,7 +127,7 @@ final class CharactersUICollectionViewDelegate: NSObject, UICollectionViewDelega
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension CharactersUICollectionViewDelegate: UICollectionViewDelegateFlowLayout {
+extension CharactersCollectionViewDelegate: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,

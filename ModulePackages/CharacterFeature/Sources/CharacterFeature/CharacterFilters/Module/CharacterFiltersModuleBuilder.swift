@@ -26,4 +26,3 @@ internal final class CharacterFiltersModuleBuilder {
         return hostingController
     }
 }
-

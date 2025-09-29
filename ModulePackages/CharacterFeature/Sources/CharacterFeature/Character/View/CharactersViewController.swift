@@ -11,7 +11,7 @@ final class CharactersViewController: UIViewController {
     
     private let viewModel: CharactersViewModel
     private var cancellables = Set<AnyCancellable>()
-    private var collectionViewDelegate: CharactersUICollectionViewDelegate
+    private var collectionViewDelegate: CharactersCollectionViewDelegate
     
     // MARK: - UI Elements
     
@@ -26,7 +26,7 @@ final class CharactersViewController: UIViewController {
         self.navigationOutput = navigationOutput
         self.viewModel = viewModel
         
-        self.collectionViewDelegate = CharactersUICollectionViewDelegate(viewModel: viewModel)
+        self.collectionViewDelegate = CharactersCollectionViewDelegate(viewModel: viewModel)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -126,9 +126,9 @@ private extension CharactersViewController {
     }
 }
 
-// MARK: - CharactersUICollectionViewDelegateOutputProtocol
+// MARK: - CharactersCollectionViewDelegateProtocol
 
-extension CharactersViewController: CharactersUICollectionViewDelegateOutputProtocol {
+extension CharactersViewController: CharactersCollectionViewDelegateProtocol {
     func didCreateFooterView(_ footer: FooterLoadingCollectionReusableView) {
         charactersView.footerLoadingIndicator = footer
     }

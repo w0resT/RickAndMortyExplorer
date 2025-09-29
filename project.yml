@@ -52,6 +52,10 @@ targets:
         product: Services
       - package: CharacterFeature
         product: CharacterFeature
+    postCompileScripts:
+      - path: Scripts/swiftlint.sh
+        name: Swiftlint
+        basedOnDependencyAnalysis: false
 
 # Схемы
 schemes:

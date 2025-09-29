@@ -13,7 +13,7 @@ let package = Package(
         .library(
             name: "CharacterFeature",
             targets: ["CharacterFeature"]
-        ),
+        )
     ],
     dependencies: [
         .package(path: "../ApplicationCore"),
@@ -30,6 +30,6 @@ let package = Package(
                 "ApplicationResources",
                 "Services"
             ]
-        ),
+        )
     ]
 )

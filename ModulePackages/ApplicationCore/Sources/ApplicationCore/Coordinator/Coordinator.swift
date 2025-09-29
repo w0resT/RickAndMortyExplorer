@@ -44,4 +44,3 @@ open class Coordinator<ParentCoordinator: ParentCoordinatorProtocol>: Coordinato
         }
     }
 }
-
