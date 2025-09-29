@@ -10,7 +10,6 @@ final class CharactersViewModel {
     @Published private(set) var loadingState: CharactersLoadingState
     @Published private(set) var errorMessage: String?
     @Published var searchQuery: String
-    
     internal let charactersChange = PassthroughSubject<CharactersChange, Never>()
     internal let imageLoads = PassthroughSubject<(id: Int, data: Data), Never>()
     

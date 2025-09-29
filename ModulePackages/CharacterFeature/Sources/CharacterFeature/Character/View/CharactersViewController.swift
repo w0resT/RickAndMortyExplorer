@@ -100,14 +100,13 @@ private extension CharactersViewController {
             title: "Filters",
             image: nil,
             target: self,
-            action: #selector(didTapFilters))
+            action: #selector(didTapFilters)
+        )
         self.navigationItem.rightBarButtonItem = barButton
     }
     
     func setupCollectionView() {
-        if collectionView.superview == nil {
-            view.addSubview(collectionView)
-        }
+        view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -118,9 +117,7 @@ private extension CharactersViewController {
     }
     
     func setupLoadingIndicator() {
-        if loadingIndicator.superview == nil {
-            view.addSubview(loadingIndicator)
-        }
+        view.addSubview(loadingIndicator)
         
         NSLayoutConstraint.activate([
             loadingIndicator.heightAnchor.constraint(equalToConstant: 100),
@@ -342,7 +339,7 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: -
+// MARK: - UISearchResultsUpdating
 
 extension CharactersViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
