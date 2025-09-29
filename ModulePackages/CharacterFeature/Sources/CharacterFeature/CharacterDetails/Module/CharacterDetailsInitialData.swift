@@ -1,3 +1,3 @@
-struct CharacterDetailsInitialData {
-    let character: Character
+public struct CharacterDetailsInitialData {
+    public let character: Character
 }

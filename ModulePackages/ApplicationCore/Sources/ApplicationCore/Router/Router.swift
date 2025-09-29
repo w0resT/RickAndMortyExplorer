@@ -1,14 +1,15 @@
 import UIKit
 
 public final class Router: RouterProtocol {
+    
     // MARK: - Singleton
     
     static public let shared: Router = Router()
 
     // MARK: - Properties
     
-    private var rootWindow: UIWindow?
-    private var rootNavigationController: UINavigationController?
+    public var rootWindow: UIWindow?
+    public var rootNavigationController: UINavigationController?
 
     // MARK: - RouterProtocol Methods
 

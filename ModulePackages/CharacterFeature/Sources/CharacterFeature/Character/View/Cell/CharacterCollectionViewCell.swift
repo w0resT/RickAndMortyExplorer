@@ -135,9 +135,7 @@ private extension CharacterCollectionViewCell {
     }
     
     func setupAvatarImageView() {
-        if avatarImageView.superview == nil {
-            contentView.addSubview(avatarImageView)
-        }
+        contentView.addSubview(avatarImageView)
         
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -148,9 +146,7 @@ private extension CharacterCollectionViewCell {
     }
     
     func setupNameLabel() {
-        if nameLabel.superview == nil {
-            contentView.addSubview(nameLabel)
-        }
+        contentView.addSubview(nameLabel)
         
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
@@ -160,9 +156,7 @@ private extension CharacterCollectionViewCell {
     }
     
     func setupStatusStackView() {
-        if statusStackView.superview == nil {
-            contentView.addSubview(statusStackView)
-        }
+        contentView.addSubview(statusStackView)
         
         statusStackView.addArrangedSubview(statusIndicatorView)
         statusStackView.addArrangedSubview(statusSpeciesGenderLabel)
@@ -175,9 +169,7 @@ private extension CharacterCollectionViewCell {
     }
     
     func setupLocationNameLabel() {
-        if locationNameLabel.superview == nil {
-            contentView.addSubview(locationNameLabel)
-        }
+        contentView.addSubview(locationNameLabel)
         
         NSLayoutConstraint.activate([
             locationNameLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: -6),
@@ -187,9 +179,7 @@ private extension CharacterCollectionViewCell {
     }
     
     func setupLocationTitleLabel() {
-        if locationTitleLabel.superview == nil {
-            contentView.addSubview(locationTitleLabel)
-        }
+        contentView.addSubview(locationTitleLabel)
         
         NSLayoutConstraint.activate([
             locationTitleLabel.bottomAnchor.constraint(equalTo: locationNameLabel.topAnchor, constant: -2),
@@ -204,25 +194,18 @@ private extension CharacterCollectionViewCell {
 private extension CharacterCollectionViewCell {
     func getBackgroundColor(by gender: CharacterGender) -> UIColor {
         return switch gender {
-        case .male:
-            UIColor.systemBlue.withAlphaComponent(0.3)
-        case .female:
-            UIColor.systemPink.withAlphaComponent(0.3)
-        case .genderless:
-            UIColor.systemYellow.withAlphaComponent(0.3)
-        case .unknown:
-            UIColor.systemGray.withAlphaComponent(0.3)
+        case .male: UIColor.systemBlue.withAlphaComponent(0.3)
+        case .female: UIColor.systemPink.withAlphaComponent(0.3)
+        case .genderless: UIColor.systemYellow.withAlphaComponent(0.3)
+        case .unknown: UIColor.systemGray.withAlphaComponent(0.3)
         }
     }
     
     func getStatusColor(by status: CharacterStatus) -> UIColor {
         return switch status {
-        case .alive:
-            .systemGreen
-        case .dead:
-            .systemRed
-        case .unknown:
-            .systemGray
+        case .alive: .systemGreen
+        case .dead: .systemRed
+        case .unknown: .systemGray
         }
     }
 }

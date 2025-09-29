@@ -46,9 +46,7 @@ private extension FooterLoadingCollectionReusableView {
     }
     
     func setupLoadingIndicator() {
-        if loadingIndicator.superview == nil {
-            addSubview(loadingIndicator)
-        }
+        addSubview(loadingIndicator)
         
         NSLayoutConstraint.activate([
             loadingIndicator.heightAnchor.constraint(equalToConstant: 100),

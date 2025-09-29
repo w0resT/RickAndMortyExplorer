@@ -24,12 +24,9 @@ public extension Character {
 public extension CharacterStatus {
     init(from response: CharacterStatusResponse) {
         switch response {
-        case .alive:
-            self = .alive
-        case .dead:
-            self = .dead
-        case .unknown:
-            self = .unknown
+        case .alive: self = .alive
+        case .dead: self = .dead
+        case .unknown: self = .unknown
         }
     }
 }
@@ -39,14 +36,10 @@ public extension CharacterStatus {
 public extension CharacterGender {
     init(from response: CharacterGenderResponse) {
         switch response {
-        case .male:
-            self = .male
-        case .female:
-            self = .female
-        case .genderless:
-            self = .genderless
-        case .unknown:
-            self = .unknown
+        case .male: self = .male
+        case .female: self = .female
+        case .genderless: self = .genderless
+        case .unknown: self = .unknown
         }
     }
 }

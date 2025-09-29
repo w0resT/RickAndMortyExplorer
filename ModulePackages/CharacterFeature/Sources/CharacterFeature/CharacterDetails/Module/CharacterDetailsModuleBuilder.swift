@@ -2,8 +2,8 @@ import ApplicationCore
 import UIKit
 import SwiftUI
 
-final class CharacterDetailsModuleBuilder {
-    static func build(
+internal final class CharacterDetailsModuleBuilder {
+    internal static func build(
         navigationOutput: CharacterDetailsNavigationListenerOutputProtocol?,
         services: DetailsModuleServices,
         initialData: CharacterDetailsInitialData

@@ -7,12 +7,9 @@ enum CharacterDetailsStatus: String {
 extension CharacterDetailsStatus {
     init(from character: CharacterStatus) {
         switch character {
-        case .alive:
-            self = .alive
-        case .dead:
-            self = .dead
-        case .unknown:
-            self = .unknown
+        case .alive: self = .alive
+        case .dead: self = .dead
+        case .unknown: self = .unknown
         }
     }
 }

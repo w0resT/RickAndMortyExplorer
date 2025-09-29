@@ -3,6 +3,7 @@ import ApplicationCore
 public final class CharacterCoordinator<CharacterParentCoordinator: CharacterParentCoordinatorProtocol>: Coordinator<CharacterParentCoordinator> {
     
     // MARK: - Types
+    
     public typealias Module = CharacterDetailsModuleProtocol
         & CharacterFiltersModuleProtocol
     

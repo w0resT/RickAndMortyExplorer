@@ -1,6 +1,6 @@
 import Foundation
 
-public struct CharacterDetailsViewData {
+struct CharacterDetailsViewData {
     let id: Int
     let name: String
     let status: CharacterDetailsStatus

@@ -1,6 +1,8 @@
 import SwiftUI
 
-struct CharacterDetailsView<ViewModel: CharacterDetailsViewModelProtocol>: View {
+typealias CharacterDetailsVM = CharacterDetailsViewModelProtocol
+
+struct CharacterDetailsView<ViewModel: CharacterDetailsVM>: View {
     
     // MARK: - Properties
     

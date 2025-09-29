@@ -21,23 +21,37 @@ struct CharacterDetailsImageView: View {
     
     var body: some View {
         if state == .success {
-            if let data = imageData, let uiImage = UIImage(data: data) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFill()
-            } else {
-                Image(systemName: "xmark.circle")
-                    .resizable()
-                    .scaledToFill()
-            }
+            successView
         } else if state == .loading {
-            ProgressView()
-                .controlSize(.large)
+            loadingView
         } else {
-            Image(systemName: "person.crop.circle.badge.xmark")
+            errorView
+        }
+    }
+    
+    // MARK: - Private
+    
+    private var successView: some View {
+        if let data = imageData, let uiImage = UIImage(data: data) {
+            Image(uiImage: uiImage)
+                .resizable()
+                .scaledToFill()
+        } else {
+            Image(systemName: "xmark.circle")
                 .resizable()
                 .scaledToFill()
         }
+    }
+    
+    private var loadingView: some View {
+        ProgressView()
+            .controlSize(.large)
+    }
+    
+    private var errorView: some View {
+        Image(systemName: "person.crop.circle.badge.xmark")
+            .resizable()
+            .scaledToFill()
     }
 }
 

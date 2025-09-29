@@ -1,6 +1,9 @@
 import SwiftUI
 
-struct CharacterFiltersView<ViewModel: CharacterFiltersViewModelProtocol>: View {
+typealias CharacterFiltersVM = CharacterFiltersViewModelProtocol
+    & CharacterFiltersViewModelInputProtocol
+
+struct CharacterFiltersView<ViewModel: CharacterFiltersVM>: View {
     
     // MARK: - Private Properties
     
@@ -16,36 +19,16 @@ struct CharacterFiltersView<ViewModel: CharacterFiltersViewModelProtocol>: View 
     
     var body: some View {
         VStack {
-            HStack {
-                Button("Reset") {
-                    viewModel.resetFilters()
-                }
-                .padding()
-                
-                Spacer()
-                
-                Button("Apply") {
-                    viewModel.applyFilters()
-                }
-                .padding()
-            }
-            .padding(.horizontal, 15)
-            .padding(.top, 3)
+            CharacterFiltersHeaderView(
+                onReset: viewModel.resetFilters,
+                onApply: viewModel.applyFilters
+            )
             
             Form {
-                Section("Filters") {
-                    Picker("Character status", selection: $viewModel.status) {
-                        ForEach(CharacterFilterStatus.allCases, id: \.self) {
-                            Text($0.title)
-                        }
-                    }
-                    
-                    Picker("Character gender", selection: $viewModel.gender) {
-                        ForEach(CharacterFilterGender.allCases, id: \.self) {
-                            Text($0.title)
-                        }
-                    }
-                }
+                CharacterFiltersSectionFiltersView(
+                    status: $viewModel.status,
+                    gender: $viewModel.gender
+                )
             }
             .scrollDisabled(true)
         }

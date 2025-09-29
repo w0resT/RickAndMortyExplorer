@@ -1,3 +1,4 @@
+import UIKit
 import ApplicationCore
 
 public final class CharacterDetailsCoordinator<CharacterDetatailsParentCoordinator: CharacterDetailsParentCoordinatorProtocol>: Coordinator<CharacterDetatailsParentCoordinator> {
@@ -5,10 +6,11 @@ public final class CharacterDetailsCoordinator<CharacterDetatailsParentCoordinat
     // MARK: - Properties
     
     private let services: DetailsModuleServices
+    private var navigationDelegate: UINavigationControllerDelegate?
     
     // MARK: - Initialization
     
-    init(
+    internal init(
         parentCoordinator: CharacterDetatailsParentCoordinator,
         services: DetailsModuleServices
     ) {
@@ -29,6 +31,8 @@ public final class CharacterDetailsCoordinator<CharacterDetatailsParentCoordinat
             initialData: initialData
         )
         
+        self.navigationDelegate = CharacterDetailsNavigationDelegate()
+        self.router.rootNavigationController?.delegate = self.navigationDelegate
         self.router.pushViewController(viewController: viewController)
     }
 }
