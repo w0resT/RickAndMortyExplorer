@@ -16,15 +16,13 @@ protocol CharactersViewModelProtocol {
 
 final class CharactersViewModel: CharactersViewModelProtocol {
     
-    // MARK: - State
+    // MARK: - Properties
 
     @Published private(set) var characters: [Character]
     @Published private(set) var charactersInfo: Info?
     @Published private(set) var loadingState: CharactersLoadingState
     @Published private(set) var errorMessage: String?
     @Published var searchQuery: String
-    
-    // MARK: - Events
     
     private let didCharactersChangeSubject = PassthroughSubject<CharactersChangeEvent, Never>()
     var didCharactersChange: AnyPublisher<CharactersChangeEvent, Never> {
@@ -35,8 +33,6 @@ final class CharactersViewModel: CharactersViewModelProtocol {
     var didImageLoad: AnyPublisher<CharactersImageLoadEvent, Never> {
         return didImageLoadSubject.eraseToAnyPublisher()
     }
-    
-    // MARK: - Properties
     
     private weak var moduleOutput: CharacterModuleOutputProtocol?
     private let services: CharacterModuleServices
@@ -77,6 +73,36 @@ final class CharactersViewModel: CharactersViewModelProtocol {
     }
 }
 
+
+// MARK: - CharactersViewModelInputProtocol
+
+extension CharactersViewModel: CharactersViewModelInputProtocol {
+    func handle(_ action: CharactersViewAction) {
+        switch action {
+        case .loadMoreCharacters:
+            loadMoreCharacters()
+        case .loadImage(let character):
+            loadImage(for: character)
+        case .selectCharacter(let character):
+            moduleOutput?.showCharacterDetails(character: character)
+        case .tapFilters:
+            moduleOutput?.showCharacterFilters(filters: characterFilters)
+        }
+    }
+}
+
+// MARK: - CharacterModuleInputProtocol
+
+extension CharactersViewModel: CharacterModuleInputProtocol {
+    func applyFilters(filters: CharacterFilters) {
+        if filters.gender != self.characterFilters.gender
+            || filters.status != self.characterFilters.status {
+            self.characterFilters = filters
+            loadWithFilters()
+        }
+    }
+}
+
 // MARK: - Helpers
 
 private extension CharactersViewModel {
@@ -109,6 +135,14 @@ private extension CharactersViewModel {
     
     func loadCharactersInitial() {
         startLoading()
+    }
+    
+    func loadMoreCharacters() {
+        let nextURL = charactersInfo?.next
+        startLoading(
+            nextURL: nextURL,
+            append: true)
+        
     }
     
     func loadWithFilters() {
@@ -171,18 +205,6 @@ private extension CharactersViewModel {
             self.loadingState = .error
         }
     }
-}
-
-// MARK: - CharactersViewModelInputProtocol
-
-extension CharactersViewModel: CharactersViewModelInputProtocol {
-    func loadMoreCharacters() {
-        let nextURL = charactersInfo?.next
-        startLoading(
-            nextURL: nextURL,
-            append: true)
-        
-    }
     
     func loadImage(for character: Character) {
         let urlString = character.image
@@ -199,26 +221,6 @@ extension CharactersViewModel: CharactersViewModelInputProtocol {
             } catch {
                 print("Image loading for id '\(character.id)' error: ")
             }
-        }
-    }
-    
-    func didSelectCharacter(_ character: Character) {
-        moduleOutput?.showCharacterDetails(character: character)
-    }
-    
-    func didTapFilters() {
-        moduleOutput?.showCharacterFilters(filters: characterFilters)
-    }
-}
-
-// MARK: - CharacterModuleInputProtocol
-
-extension CharactersViewModel: CharacterModuleInputProtocol {
-    func applyFilters(filters: CharacterFilters) {
-        if filters.gender != self.characterFilters.gender
-            || filters.status != self.characterFilters.status {
-            self.characterFilters = filters
-            loadWithFilters()
         }
     }
 }

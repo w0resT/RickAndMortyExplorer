@@ -54,7 +54,7 @@ final class CharactersUICollectionViewDelegate: NSObject, UICollectionViewDelega
             .eraseToAnyPublisher()
         
         cell.bindAvatarImage(avatarImage)
-        self.viewModel.loadImage(for: character)
+        self.viewModel.handle(.loadImage(character))
         
         return cell
     }
@@ -73,7 +73,7 @@ final class CharactersUICollectionViewDelegate: NSObject, UICollectionViewDelega
         }
         
         let character = viewModel.characters[indexPath.item]
-        viewModel.didSelectCharacter(character)
+        viewModel.handle(.selectCharacter(character))
     }
     
     func collectionView(
@@ -120,7 +120,7 @@ final class CharactersUICollectionViewDelegate: NSObject, UICollectionViewDelega
         let scrollViewHeight = scrollView.bounds.height
         
         if scrollViewOffset >= (contentViewHeight - scrollViewHeight) {
-            viewModel.loadMoreCharacters()
+            viewModel.handle(.loadMoreCharacters)
         }
     }
 }

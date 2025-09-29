@@ -121,7 +121,7 @@ private extension CharactersViewController {
     }
     
     @objc func didTapFilters() {
-        viewModel.didTapFilters()
+        viewModel.handle(.tapFilters)
     }
 }
 
