@@ -1,4 +1,5 @@
 import SwiftUI
+import DesignSystem
 
 struct CharacterDetailsIdentityView: View {
     
@@ -24,12 +25,11 @@ struct CharacterDetailsIdentityView: View {
     
     var body: some View {
         Text(name)
-            .font(.largeTitle)
-            .fontWeight(.bold)
+            .font(.designSystem(.titleLarge))
         
         Text("\(species) - \(gender)")
-            .font(.subheadline)
-            .foregroundColor(.secondary)
+            .font(.designSystem(.bodySecondary))
+            .foregroundColor(.designSystem(.secondary))
     }
 }
 

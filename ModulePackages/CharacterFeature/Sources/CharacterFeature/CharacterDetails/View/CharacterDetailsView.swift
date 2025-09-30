@@ -1,4 +1,5 @@
 import SwiftUI
+import DesignSystem
 
 typealias CharacterDetailsVM = CharacterDetailsViewModelProtocol
 
@@ -18,14 +19,14 @@ struct CharacterDetailsView<ViewModel: CharacterDetailsVM>: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 10) {
+            VStack(spacing: .designSystem(.padding12)) {
                 CharacterDetailsAvatarView(
                     imageData: viewModel.details.imageData,
                     state: viewModel.loadingState,
                     status: viewModel.details.status
                 )
     
-                Divider().padding(.vertical, 4)
+                Divider().padding(.vertical, .designSystem(.padding4))
                 
                 CharacterDetailsIdentityView(
                     name: viewModel.details.name,
@@ -33,13 +34,13 @@ struct CharacterDetailsView<ViewModel: CharacterDetailsVM>: View {
                     gender: viewModel.details.gender
                 )
                 
-                Divider().padding(.vertical, 4)
+                Divider().padding(.vertical, .designSystem(.padding4))
                 
                 CharacterDetailsInfoSection(details: viewModel.details)
                 
                 Spacer()
             }
-            .padding(.horizontal, 12)
+            .padding(.horizontal, .designSystem(.padding12))
         }
     }
 }

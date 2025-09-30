@@ -1,4 +1,5 @@
 import SwiftUI
+import DesignSystem
 
 struct CharacterDetailsInfoRow: View {
     
@@ -22,10 +23,10 @@ struct CharacterDetailsInfoRow: View {
     var body: some View {
         VStack(
             alignment: .leading,
-            spacing: 4
+            spacing: .designSystem(.padding4)
         ) {
             Text(title)
-                .font(.headline)
+                .font(.designSystem(.bodySecondarySemibold))
             
             Text(description)
         }

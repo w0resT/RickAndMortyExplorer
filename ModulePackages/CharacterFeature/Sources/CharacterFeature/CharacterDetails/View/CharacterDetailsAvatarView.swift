@@ -1,4 +1,5 @@
 import SwiftUI
+import DesignSystem
 
 struct CharacterDetailsAvatarView: View {
     
@@ -28,8 +29,8 @@ struct CharacterDetailsAvatarView: View {
                 imageData: imageData,
                 state: state
             )
-            .clipShape(RoundedRectangle(cornerRadius: 30))
-            .padding(.top, 6)
+            .clipShape(RoundedRectangle(cornerRadius: .designSystem(.corner30)))
+            .padding(.top, .designSystem(.padding6))
             
             if state == .success {
                 CharacterDetailsImageBadgeView(status: status)
