@@ -89,4 +89,8 @@ make generate_resources generate_project
       </ul>
     </td>
   </tr>
+    <tr>
+    <td><code>DesignSystem</code></td>
+    <td>Содержит цвета, шрифты, размеры (токены)</td>
+  </tr>
 </table>
