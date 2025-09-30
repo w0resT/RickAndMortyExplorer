@@ -1,4 +1,5 @@
 import SwiftUI
+import DesignSystem
 import ApplicationResources
 
 struct CharacterDetailsInfoSection: View {
@@ -16,7 +17,7 @@ struct CharacterDetailsInfoSection: View {
     // MARK: - Body Implementation
     
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: .designSystem(.padding12)) {
             CharacterDetailsInfoRow(
                 title: Localization.CharacterDetails.origin,
                 description: details.origin

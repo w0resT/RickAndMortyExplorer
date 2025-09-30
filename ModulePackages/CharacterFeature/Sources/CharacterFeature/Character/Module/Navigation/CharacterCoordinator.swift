@@ -10,6 +10,7 @@ public final class CharacterCoordinator<CharacterParentCoordinator: CharacterPar
         & CharacterFiltersModuleProtocol
     
     // MARK: - Properties
+    
     private let services: CharacterModuleServices
     private let module: Module
     

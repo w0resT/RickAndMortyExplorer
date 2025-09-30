@@ -1,5 +1,6 @@
 import UIKit
 import Combine
+import DesignSystem
 import ApplicationResources
 
 final class CharacterCollectionViewCell: UICollectionViewCell {
@@ -24,7 +25,7 @@ final class CharacterCollectionViewCell: UICollectionViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 20)
+        label.font = .designSystem(.titleMedium)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -32,7 +33,7 @@ final class CharacterCollectionViewCell: UICollectionViewCell {
     
     private let statusSpeciesGenderLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
+        label.font = .designSystem(.body)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -40,16 +41,16 @@ final class CharacterCollectionViewCell: UICollectionViewCell {
     
     private let locationTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.font = .designSystem(.caption)
         label.text = Localization.Characters.Cell.Location.title
-        label.textColor = .secondaryLabel
+        label.textColor = .designSystem(.secondary)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let locationNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
+        label.font = .designSystem(.body)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -57,7 +58,7 @@ final class CharacterCollectionViewCell: UICollectionViewCell {
     
     private let statusIndicatorView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 4
+        view.layer.cornerRadius = .designSystem(.corner4)
         view.clipsToBounds = true
         view.heightAnchor.constraint(equalToConstant: 8).isActive = true
         view.widthAnchor.constraint(equalToConstant: 8).isActive = true
@@ -69,7 +70,7 @@ final class CharacterCollectionViewCell: UICollectionViewCell {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.alignment = .center
-        stack.spacing = 6
+        stack.spacing = .designSystem(.padding6)
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -93,8 +94,8 @@ final class CharacterCollectionViewCell: UICollectionViewCell {
         self.nameLabel.text = nil
         self.statusSpeciesGenderLabel.text = nil
         self.locationNameLabel.text = nil
-        self.statusIndicatorView.backgroundColor = .systemBackground
-        self.contentView.backgroundColor = .systemBackground
+        self.statusIndicatorView.backgroundColor = .designSystem(.background)
+        self.contentView.backgroundColor = .designSystem(.background)
         
         self.cancellable?.cancel()
     }
@@ -125,7 +126,7 @@ final class CharacterCollectionViewCell: UICollectionViewCell {
 
 private extension CharacterCollectionViewCell {
     func setupUI() {
-        contentView.layer.cornerRadius = 12
+        contentView.layer.cornerRadius = .designSystem(.corner12)
         contentView.clipsToBounds = true
         
         setupAvatarImageView()
@@ -150,9 +151,18 @@ private extension CharacterCollectionViewCell {
         contentView.addSubview(nameLabel)
         
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 12),
-            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12)
+            nameLabel.topAnchor.constraint(
+                equalTo: contentView.topAnchor,
+                constant: .designSystem(.padding12)
+            ),
+            nameLabel.leadingAnchor.constraint(
+                equalTo: avatarImageView.trailingAnchor,
+                constant: .designSystem(.padding12)
+            ),
+            nameLabel.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor,
+                constant: -(.designSystem(.padding12))
+            )
         ])
     }
     
@@ -163,9 +173,18 @@ private extension CharacterCollectionViewCell {
         statusStackView.addArrangedSubview(statusSpeciesGenderLabel)
         
         NSLayoutConstraint.activate([
-            statusStackView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 2),
-            statusStackView.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 12),
-            statusStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12)
+            statusStackView.topAnchor.constraint(
+                equalTo: nameLabel.bottomAnchor,
+                constant: .designSystem(.padding2)
+            ),
+            statusStackView.leadingAnchor.constraint(
+                equalTo: avatarImageView.trailingAnchor,
+                constant: .designSystem(.padding12)
+            ),
+            statusStackView.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor,
+                constant: -(.designSystem(.padding12))
+            )
         ])
     }
     
@@ -173,9 +192,18 @@ private extension CharacterCollectionViewCell {
         contentView.addSubview(locationNameLabel)
         
         NSLayoutConstraint.activate([
-            locationNameLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: -6),
-            locationNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 12),
-            locationNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12)
+            locationNameLabel.bottomAnchor.constraint(
+                equalTo: avatarImageView.bottomAnchor,
+                constant: -(.designSystem(.padding6))
+            ),
+            locationNameLabel.leadingAnchor.constraint(
+                equalTo: avatarImageView.trailingAnchor,
+                constant: .designSystem(.padding12)
+            ),
+            locationNameLabel.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor,
+                constant: -(.designSystem(.padding12))
+            )
         ])
     }
     
@@ -183,9 +211,18 @@ private extension CharacterCollectionViewCell {
         contentView.addSubview(locationTitleLabel)
         
         NSLayoutConstraint.activate([
-            locationTitleLabel.bottomAnchor.constraint(equalTo: locationNameLabel.topAnchor, constant: -2),
-            locationTitleLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 12),
-            locationTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12)
+            locationTitleLabel.bottomAnchor.constraint(
+                equalTo: locationNameLabel.topAnchor,
+                constant: -(.designSystem(.padding2))
+            ),
+            locationTitleLabel.leadingAnchor.constraint(
+                equalTo: avatarImageView.trailingAnchor,
+                constant: .designSystem(.padding12)
+            ),
+            locationTitleLabel.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor,
+                constant: -(.designSystem(.padding12))
+            )
         ])
     }
 }

@@ -1,4 +1,5 @@
 import SwiftUI
+import DesignSystem
 
 struct CharacterDetailsImageBadgeView: View {
     
@@ -15,20 +16,19 @@ struct CharacterDetailsImageBadgeView: View {
     // MARK: - Body Implementation
     
     var body: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: .designSystem(.padding6)) {
             Circle()
                 .fill(statusColor(status))
                 .frame(width: 10, height: 10)
             
             Text("\(status.title)")
-                .font(.headline)
-                .fontWeight(.semibold)
+                .font(.designSystem(.bodySecondarySemibold))
                 .foregroundColor(.white)
         }
-        .padding(.vertical, 8)
-        .padding(.horizontal, 20)
+        .padding(.vertical, .designSystem(.padding8))
+        .padding(.horizontal, .designSystem(.padding20))
         .background(Color.black.opacity(0.75))
-        .clipShape(RoundedRectangle(cornerRadius: 15))
+        .clipShape(RoundedRectangle(cornerRadius: .designSystem(.corner16)))
         .padding(10)
     }
     

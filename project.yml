@@ -52,6 +52,8 @@ targets:
         product: Services
       - package: CharacterFeature
         product: CharacterFeature
+      - package: DesignSystem
+        product: DesignSystem
     postCompileScripts:
       - path: Scripts/swiftlint.sh
         name: Swiftlint
@@ -82,4 +84,7 @@ packages:
     group: ModulePackages
   CharacterFeature:
     path: ModulePackages/CharacterFeature
+    group: ModulePackages
+  DesignSystem:
+    path: ModulePackages/DesignSystem
     group: ModulePackages

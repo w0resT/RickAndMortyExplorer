@@ -1,4 +1,5 @@
 import UIKit
+import DesignSystem
 import ApplicationResources
 
 final class CharactersView: UIView {
@@ -80,7 +81,7 @@ private extension CharactersView {
     }
     
     func setupView() {
-        backgroundColor = .systemBackground
+        backgroundColor = .designSystem(.background)
     }
     
     func setupCollectionView() {

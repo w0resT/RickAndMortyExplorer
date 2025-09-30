@@ -30,8 +30,8 @@ struct CharacterFiltersHeaderView: View {
             Button(Localization.CharacterFilters.Button.apply, action: onApply)
                 .padding()
         }
-        .padding(.horizontal, 15)
-        .padding(.top, 3)
+        .padding(.horizontal, .designSystem(.padding16))
+        .padding(.top, .designSystem(.padding4))
     }
 }
 
