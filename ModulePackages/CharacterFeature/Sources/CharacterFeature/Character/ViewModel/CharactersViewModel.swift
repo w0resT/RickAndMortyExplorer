@@ -160,7 +160,8 @@ private extension CharactersViewModel {
         searchQuery: String? = nil,
         append: Bool = false
     ) async {
-        if self.loadingState == .loading || self.loadingState == .loadingNext {
+        if self.loadingState == .loading
+            || self.loadingState == .loadingNext {
             return
         }
     
@@ -189,12 +190,11 @@ private extension CharactersViewModel {
                 
                 self.characters.append(contentsOf: newCharacters)
                 self.didCharactersChangeSubject.send(.append(indexPaths: indexPaths))
-                self.loadingState = .success
             } else {
                 self.characters = newCharacters
                 self.didCharactersChangeSubject.send(.reload)
-                self.loadingState = .success
             }
+            self.loadingState = .success
         } catch is CancellationError {
             self.loadingState = .cancelled
         } catch {

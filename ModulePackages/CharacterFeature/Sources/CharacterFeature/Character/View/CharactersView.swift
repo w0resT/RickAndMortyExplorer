@@ -73,6 +73,7 @@ extension CharactersView {
 }
 
 // MARK: - Setup UI
+
 private extension CharactersView {
     func setupUI() {
         setupView()
