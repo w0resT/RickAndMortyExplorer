@@ -160,7 +160,8 @@ private extension CharactersViewModel {
         searchQuery: String? = nil,
         append: Bool = false
     ) async {
-        if self.loadingState == .loading || self.loadingState == .loadingNext {
+        if self.loadingState == .loading
+            || self.loadingState == .loadingNext {
             return
         }
     
